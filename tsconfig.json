@@ -7,7 +7,11 @@
       "esModuleInterop": true,                // 允许对 CommonJS 模块进行默认导入
       "skipLibCheck": true,                   // 跳过类型声明文件的检查
       "forceConsistentCasingInFileNames": true, // 文件名大小写一致
-      "strict": true                          // 启用严格模式
+      "strict": true,         // 启用严格模式
+      "baseUrl": "./src",                          // 设置为项目根目录
+      "paths": {
+        "@/*": ["*"]                          // 将 @ 映射到 src 目录
+      },
     },
     "include": ["src"]                        // 包含的文件/目录
 }
