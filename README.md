@@ -1,1 +1,6 @@
-# qinglan-QA-front
+# 项目简介
+- 具备中台配置&用户端个性化展示的问卷调查系统
+
+# 技术栈
+- React、Ant Design
+
