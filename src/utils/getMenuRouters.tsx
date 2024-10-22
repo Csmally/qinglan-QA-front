@@ -1,18 +1,16 @@
+import { FetchRouterItemType } from "@/common/types/commonTypes";
+import HomePage from "@/pages/Home";
 import routers from "@/routers";
 import { MenuProps } from "antd";
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-interface FetchRouterItemType {
-  key: string;
-  children?: FetchRouterItemType[];
-}
+import { Routes, Route } from "react-router-dom";
 
 interface RouterMapDataItemType {
   path: string;
   component: React.ReactNode;
 }
 
+// 设置菜单路由
 const getMenus = (fetchRouters: FetchRouterItemType[]): MenuProps["items"] =>
   fetchRouters.map((menuItem) => {
     const singleMenu = routers.find((item) => item.key === menuItem.key)!;
@@ -24,6 +22,7 @@ const getMenus = (fetchRouters: FetchRouterItemType[]): MenuProps["items"] =>
     };
   });
 
+// 设置路由数据
 const getRoutersMap = (fetchRouters: FetchRouterItemType[]) => {
   const result: RouterMapDataItemType[] = [];
   fetchRouters.forEach((item) => {
@@ -42,16 +41,16 @@ const getRoutersMap = (fetchRouters: FetchRouterItemType[]) => {
   return result;
 };
 
+// 设置路由组件
 const getRouters = (fetchRouters: FetchRouterItemType[]) => {
   const routersMapDatas = getRoutersMap(fetchRouters);
   return (
-    <Router>
       <Routes>
+        <Route path="/" element={<HomePage/>} />
         {routersMapDatas.map((item, index) => (
           <Route path={item.path} element={item.component} key={index} />
         ))}
       </Routes>
-    </Router>
   );
 };
 

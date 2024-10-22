@@ -1,5 +1,5 @@
-const TemplateSetUp = () => {
+const TemplateSetUpPage: React.FC = () => {
   return <div>我是TemplateSetUp</div>;
 };
 
-export default TemplateSetUp;
+export default TemplateSetUpPage;

@@ -1,21 +1,26 @@
-import { Avatar, Breadcrumb, Layout, Menu } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-import { getMenus, getRouters } from "@/utils/getMenuRouters";
-
-const { Header, Content, Sider, Footer } = Layout;
-
-const aa = (e: any) => {
-  console.log("9898eee", e);
-};
+import { Layout } from "antd";
+import LayoutHeader from "@/components/layout/header";
+import LayoutFooter from "@/components/layout/footer";
+import SiderMenu from "@/components/layout/siderMenu";
+import MainPageView from "@/components/layout/mainPageView";
+import { BrowserRouter as Router } from "react-router-dom";
+import { useEffect, useState } from "react";
+import usePathStore from "@/store/pathStore";
 
 const fetchRouterData = [
+  {
+    key: "home",
+  },
   {
     key: "templateSetUp",
     children: [
       {
-        key: "contracts",
+        key: "test",
       },
     ],
+  },
+  {
+    key: "contracts",
   },
   {
     key: "systemSetUp",
@@ -26,60 +31,28 @@ const fetchRouterData = [
 ];
 
 const App: React.FC = () => {
-  const menus = getMenus(fetchRouterData);
+  const [loading, setLoading] = useState(false);
+  const { setPathData } = usePathStore();
+  // 获取服务端路由配置
+  useEffect(() => {
+    // 设置后端获取的path配置存入全局store
+    setPathData(fetchRouterData);
+    setLoading(false);
+  }, []);
   return (
-    <Layout style={{ height: "100vh" }}>
-      <Header
-        style={{
-          display: "flex",
-          alignItems: "center",
-          color: "#ffffff",
-          justifyContent: "space-between",
-          padding: 20,
-        }}
-      >
-        <div>此处是清岚logo图片</div>
-        <Avatar size={64} icon={<UserOutlined />} />
-      </Header>
-      <Layout>
-        <Sider width={200}>
-          <Menu
-            mode="vertical"
-            style={{ borderRight: 0, height: "100%" }}
-            items={menus}
-            theme="dark"
-            onClick={aa}
-          />
-        </Sider>
-        <Layout style={{ padding: "0 24px" }}>
-          <Breadcrumb
-            items={[{ title: "Home" }, { title: "List" }, { title: "App" }]}
-            style={{ margin: "16px 0" }}
-          />
-          <Content
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-              background: "#ffffff",
-              borderRadius: 10,
-            }}
-          >
-            {getRouters(fetchRouterData)}
-          </Content>
-          <Footer
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: 10,
-            }}
-          >
-            清岚问卷
-          </Footer>
+    !loading &&
+    <Router>
+      <Layout style={{ height: "100vh" }}>
+        <LayoutHeader />
+        <Layout>
+          <SiderMenu />
+          <Layout style={{ padding: "10px 24px 0 24px" }}>
+            <MainPageView />
+            <LayoutFooter />
+          </Layout>
         </Layout>
       </Layout>
-    </Layout>
+    </Router>
   );
 };
 

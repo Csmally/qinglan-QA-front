@@ -1,5 +1,5 @@
-const Contracts = () => {
+const ContractsPage: React.FC = () => {
   return <div>我是Contracts</div>;
 };
 
-export default Contracts;
+export default ContractsPage;

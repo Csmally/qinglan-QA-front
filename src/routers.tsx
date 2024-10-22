@@ -3,12 +3,16 @@ import {
   UsergroupAddOutlined,
   SettingOutlined,
   UserOutlined,
+  DashboardOutlined,
+  BugOutlined,
 } from "@ant-design/icons";
 import React from "react";
-import TemplateSetUp from "./pages/TemplateSetUp";
-import Contracts from "./pages/Contracts";
-import SystemSetUp from "./pages/SystemSetUp";
-import UserSetUp from "./pages/UserSetUp";
+import TemplateSetUpPage from "@/pages/TemplateSetUp";
+import ContractsPage from "@/pages/Contracts";
+import SystemSetUpPage from "@/pages/SystemSetUp";
+import UserSetUpPage from "@/pages/UserSetUp";
+import HomePage from "@/pages/Home";
+import TestPage from "@/pages/Test";
 
 interface RouterItemType {
   key: string;
@@ -20,28 +24,40 @@ interface RouterItemType {
 
 const routers: RouterItemType[] = [
   {
+    key: "home",
+    label: "数据面板",
+    icon: <DashboardOutlined />,
+    component: <HomePage />,
+  },
+  {
     key: "templateSetUp",
     label: "模版配置",
     icon: <BookOutlined />,
-    component: <TemplateSetUp />,
+    component: <TemplateSetUpPage />,
   },
   {
     key: "contracts",
     label: "签约客户",
     icon: <UsergroupAddOutlined />,
-    component: <Contracts />,
+    component: <ContractsPage />,
   },
   {
     key: "systemSetUp",
     label: "系统设置",
     icon: <SettingOutlined />,
-    component: <SystemSetUp />,
+    component: <SystemSetUpPage />,
   },
   {
     key: "userSetUp",
     label: "我的设置",
     icon: <UserOutlined />,
-    component: <UserSetUp />,
+    component: <UserSetUpPage />,
+  },
+  {
+    key: "test",
+    label: "测试页面",
+    icon: <BugOutlined />,
+    component: <TestPage />,
   },
 ];
 
