@@ -40,19 +40,20 @@ const App: React.FC = () => {
     setLoading(false);
   }, []);
   return (
-    !loading &&
-    <Router>
-      <Layout style={{ height: "100vh" }}>
-        <LayoutHeader />
-        <Layout>
-          <SiderMenu />
-          <Layout style={{ padding: "10px 24px 0 24px" }}>
-            <MainPageView />
-            <LayoutFooter />
+    !loading && (
+      <Router>
+        <Layout style={{ height: "100vh" }}>
+          <LayoutHeader />
+          <Layout>
+            <SiderMenu />
+            <Layout style={{ padding: "10px 24px 0 24px" }}>
+              <MainPageView />
+              <LayoutFooter />
+            </Layout>
           </Layout>
         </Layout>
-      </Layout>
-    </Router>
+      </Router>
+    )
   );
 };
 

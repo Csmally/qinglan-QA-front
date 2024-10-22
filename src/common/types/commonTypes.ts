@@ -1,6 +1,6 @@
 interface FetchRouterItemType {
-    key: string;
-    children?: FetchRouterItemType[];
+  key: string;
+  children?: FetchRouterItemType[];
 }
 
 export { FetchRouterItemType };

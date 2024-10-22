@@ -45,12 +45,12 @@ const getRoutersMap = (fetchRouters: FetchRouterItemType[]) => {
 const getRouters = (fetchRouters: FetchRouterItemType[]) => {
   const routersMapDatas = getRoutersMap(fetchRouters);
   return (
-      <Routes>
-        <Route path="/" element={<HomePage/>} />
-        {routersMapDatas.map((item, index) => (
-          <Route path={item.path} element={item.component} key={index} />
-        ))}
-      </Routes>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      {routersMapDatas.map((item, index) => (
+        <Route path={item.path} element={item.component} key={index} />
+      ))}
+    </Routes>
   );
 };
 
