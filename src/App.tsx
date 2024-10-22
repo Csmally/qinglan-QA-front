@@ -31,7 +31,7 @@ const fetchRouterData = [
 ];
 
 const App: React.FC = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { setPathData } = usePathStore();
   // 获取服务端路由配置
   useEffect(() => {

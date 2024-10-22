@@ -29,9 +29,13 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/, // 处理 CSS 文件
+        test: /\.css$/i, // 处理 CSS 文件
         exclude: /node_modules/,
         use: ["style-loader", "css-loader"], // 使用 style-loader 和 css-loader
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i, // 匹配图片文件
+        type: "asset/resource",
       },
     ],
   },

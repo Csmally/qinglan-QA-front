@@ -13,5 +13,5 @@
         "@/*": ["*"]                          // 将 @ 映射到 src 目录
       },
     },
-    "include": ["src"]                        // 包含的文件/目录
+    "include": ["src", "declarations.d.ts"]                        // 包含的文件/目录
 }
