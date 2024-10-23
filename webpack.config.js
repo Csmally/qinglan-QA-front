@@ -1,7 +1,8 @@
-// webpack.config.js
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
+const Dotenv = require("dotenv-webpack");
+const isDev = process.env.NODE_ENV === "development" ? true : false;
+const envFile = isDev ? "./.env.development" : "./.env.production";
 module.exports = {
   entry: "./src/index.tsx", // 入口文件改为 TypeScript
   output: {
@@ -43,13 +44,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html", // 指定 HTML 模板
     }),
+    new Dotenv({ path: envFile }),
   ],
   devServer: {
     static: {
       directory: path.join(__dirname, "dist"),
     },
     compress: true,
-    port: 3000,
+    port: 8082,
   },
   mode: "development", // 开发模式
 };

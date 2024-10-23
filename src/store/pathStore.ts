@@ -1,4 +1,4 @@
-import { FetchRouterItemType } from "@/common/types/commonTypes";
+import { FetchRouterItemType } from "@/types/common";
 import { create } from "zustand";
 
 interface PathStoreType {

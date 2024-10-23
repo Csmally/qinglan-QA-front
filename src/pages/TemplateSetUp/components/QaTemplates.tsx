@@ -1,3 +1,4 @@
+import { SingleTemplateType } from "@/types/fetchResponse";
 import SingleTemplate from "./SingleTemplate";
 
 const containerStyle: React.CSSProperties = {
@@ -8,12 +9,16 @@ const containerStyle: React.CSSProperties = {
   gap: "30px 30px",
 };
 
-const Data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const QaTemplates: React.FC = () => {
+interface QaTemplatesPropsType {
+  templateList: SingleTemplateType[];
+}
+
+const QaTemplates: React.FC<QaTemplatesPropsType> = (props) => {
+  const { templateList } = props;
   return (
     <div style={containerStyle}>
-      {Data.map((template) => (
-        <SingleTemplate key={template} />
+      {templateList.map((template) => (
+        <SingleTemplate key={template.id} template={template} />
       ))}
     </div>
   );

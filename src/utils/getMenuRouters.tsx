@@ -1,4 +1,4 @@
-import { FetchRouterItemType } from "@/common/types/commonTypes";
+import { FetchRouterItemType } from "@/types/common";
 import HomePage from "@/pages/Home";
 import TemplateSetUpPage from "@/pages/TemplateSetUp";
 import routers from "@/routers";

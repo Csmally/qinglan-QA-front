@@ -1,15 +1,18 @@
+import { SingleTemplateType } from "@/types/fetchResponse";
 import style from "../styles/singleTemplate.module.css";
 import { DeleteOutlined, EditOutlined, CopyOutlined } from "@ant-design/icons";
 
-const SingleTemplate: React.FC = () => {
+interface SingleTemplatePropsType {
+  template: SingleTemplateType;
+}
+const SingleTemplate: React.FC<SingleTemplatePropsType> = (props) => {
+  const { template } = props;
   return (
     <div className={style.container}>
       <div className={style.contentContainer}>
         <div className={style.infoContainer}>
-          <div className={style.titleText}>SLC-90心智成熟学习情况调查表</div>
-          <div className={style.descText}>
-            SLC-90心智成熟学习情况调查表内容是v年开始啦v看见我佛我90心智成熟学习情况调查表内容是v年开始啦v看见我佛我90心智成熟学习情况调查表内容是v年开始啦v看见我佛我
-          </div>
+          <div className={style.titleText}>{template.name}</div>
+          <div className={style.descText}>{template.desc}</div>
         </div>
         <div className={style.handleBar}>
           <DeleteOutlined className={style.handleBtn} />
