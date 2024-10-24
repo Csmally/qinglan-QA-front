@@ -38,7 +38,7 @@ const App: React.FC = () => {
     // 设置后端获取的path配置存入全局store
     setPathData(fetchRouterData);
     setLoading(false);
-  }, []);
+  }, [setPathData]);
   return (
     !loading && (
       <Router>
