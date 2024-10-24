@@ -26,7 +26,7 @@ interface FetchTemplateListParamsType {
 const fetchAddTemplate = (
   params: any[]
 ): Promise<ResDataType<TemplateListResDataType>> => {
-  return request.post("template/list", params);
+  return request.post("template/add", params);
 };
 
 export { fetchTemplateList, fetchAddTemplate };
