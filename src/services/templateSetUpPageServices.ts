@@ -15,4 +15,18 @@ const fetchTemplateList = (
   return request.post("template/list", params);
 };
 
-export { fetchTemplateList };
+/**
+ * 添加模版
+ */
+interface FetchTemplateListParamsType {
+  page: number;
+  count: number;
+}
+
+const fetchAddTemplate = (
+  params: any[]
+): Promise<ResDataType<TemplateListResDataType>> => {
+  return request.post("template/list", params);
+};
+
+export { fetchTemplateList, fetchAddTemplate };
