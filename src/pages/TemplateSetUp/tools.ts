@@ -1,3 +1,5 @@
+import { GlobalValue } from "@/types/common";
+
 interface FormatFileDataType {
   fileTemplate: any;
   rowNumber: number;
@@ -18,10 +20,14 @@ const getOptionsConfigList = (data: any[]) => {
   return result;
 };
 
-function getTemplateQuestionsList(data: any[]) {
-  let optionsList: number[];
+function getTemplateQuestionsList(data: any[], optionsConfigList: any[]) {
+  let optionsList: any[];
   if (data?.[1]) {
-    optionsList = `${data[1]}`.split("，").map((item: any) => item - 1)
+    optionsList = `${data[1]}`.split("，").map((item: any) => {
+      return optionsConfigList.find(
+        (option: any) => `${option.value}` === `${item}`
+      );
+    });
   } else {
     optionsList = [];
   }
@@ -36,10 +42,10 @@ const formatFileData = (args: FormatFileDataType) => {
   const { fileTemplate, rowNumber, rowValues } = args;
   const realRowValues = rowValues?.slice(1);
   if (rowNumber === 1) {
-    fileTemplate.templateName = rowValues?.[1];
+    fileTemplate.name = rowValues?.[1];
   }
   if (rowNumber === 2) {
-    fileTemplate.templateDesc = rowValues?.[1];
+    fileTemplate.desc = rowValues?.[1];
   }
   if (rowNumber === 3) {
     fileTemplate.optionsConfigList = getOptionsConfigList(realRowValues);
@@ -48,7 +54,9 @@ const formatFileData = (args: FormatFileDataType) => {
     if (!fileTemplate.questionsList) {
       fileTemplate.questionsList = [];
     }
-    fileTemplate.questionsList.push(getTemplateQuestionsList(realRowValues));
+    fileTemplate.questionsList.push(
+      getTemplateQuestionsList(realRowValues, fileTemplate.optionsConfigList)
+    );
   }
 };
 

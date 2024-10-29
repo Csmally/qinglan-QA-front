@@ -20,20 +20,16 @@ const AddTemplateBtn: React.FC = () => {
   const fileListLengthRef = useRef(0);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const changeModalVisible = useCallback(
-    async (from: string) => {
-      console.log("9898list", fileList);
-      if (from === "submit") {
-        const res = await fetchAddTemplate(fileList);
-        console.log("9898res", res);
-      }
-      setModalVisible(false);
-      setFileList([]);
-      fileListRef.current = [];
-      fileListLengthRef.current = 0;
-    },
-    [fileList]
-  );
+  const changeModalVisible = useCallback(async (from: string) => {
+    if (from === "submit") {
+      const res = await fetchAddTemplate({ fileList: fileListRef.current });
+      console.log("9898res", res);
+    }
+    setModalVisible(false);
+    setFileList([]);
+    fileListRef.current = [];
+    fileListLengthRef.current = 0;
+  }, []);
   const onUploadFilds = useCallback(async (info: any) => {
     const { status } = info.file;
     if (status === "error") {
@@ -57,7 +53,6 @@ const AddTemplateBtn: React.FC = () => {
           rowValues: row.values as any[],
         });
       });
-      console.log('9898模版', fileTemplate)
       fileListRef.current.push(fileTemplate);
       setFileList(fileListRef.current);
     }
@@ -83,6 +78,11 @@ const AddTemplateBtn: React.FC = () => {
           <p className="ant-upload-text">点击或拖拽文件至该区域</p>
           <p className="ant-upload-hint">支持多个文件同时上传</p>
         </Dragger>
+        <div>
+          {fileList.map((t: any, index: number) => (
+            <div key={index}>{t.name}</div>
+          ))}
+        </div>
       </Modal>
       <FloatButton
         type="primary"

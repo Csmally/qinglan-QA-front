@@ -1,17 +1,17 @@
 {
-    "templateName": "文件名称",
-    "templateDesc": "文件描述",
+    "name": "文件名称",
+    "desc": "文件描述",
     "optionsConfigList": [
         {
-            "value": 1,
+            "value": "a",
             "showText": "严重"
         },
         {
-            "value": 2,
+            "value": "b",
             "showText": "轻微"
         },
         {
-            "value": 3,
+            "value": "c",
             "showText": "健康"
         }
     ],
@@ -19,22 +19,40 @@
         {
             "questionName": "题目1",
             "optionsList": [
-                0,
-                1
+                {
+                    "value": "a",
+                    "showText": "严重"
+                },
+                {
+                    "value": "b",
+                    "showText": "轻微"
+                }
             ]
         },
         {
             "questionName": "题目2",
             "optionsList": [
-                0
+                {
+                    "value": "a",
+                    "showText": "严重"
+                }
             ]
         },
         {
             "questionName": "题目3",
             "optionsList": [
-                0,
-                1,
-                2
+                {
+                    "value": "a",
+                    "showText": "严重"
+                },
+                {
+                    "value": "b",
+                    "showText": "轻微"
+                },
+                {
+                    "value": "c",
+                    "showText": "健康"
+                }
             ]
         }
     ]

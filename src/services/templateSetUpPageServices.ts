@@ -2,11 +2,11 @@ import { TemplateListResDataType } from "@/types/fetchResponse";
 import request from "@/utils/request";
 
 /**
- * 获取模版列表
+ * 添加模版
  */
 interface FetchTemplateListParamsType {
   page: number;
-  count: number;
+  pageSize: number;
 }
 
 const fetchTemplateList = (
@@ -15,17 +15,9 @@ const fetchTemplateList = (
   return request.post("template/list", params);
 };
 
-/**
- * 添加模版
- */
-interface FetchTemplateListParamsType {
-  page: number;
-  count: number;
-}
-
-const fetchAddTemplate = (
-  params: any[]
-): Promise<ResDataType<TemplateListResDataType>> => {
+const fetchAddTemplate = (params: {
+  fileList: any[];
+}): Promise<ResDataType<TemplateListResDataType>> => {
   return request.post("template/add", params);
 };
 

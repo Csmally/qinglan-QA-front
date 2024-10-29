@@ -13,15 +13,16 @@ const containerStyle: React.CSSProperties = {
 
 const TemplateSetUpPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
+  // 暂时写死一次查询20条
+  const pageSize = 20;
   const [total, setTotal] = useState(0);
   const [templateList, setTemplateList] = useState<SingleTemplateType[]>([]);
   const getTemplateList = useCallback(async () => {
     const { code, data } = await fetchTemplateList({
       page: currentPage,
-      count: pageSize,
+      pageSize,
     });
-    if (code === 200) {
+    if (code === 0) {
       setTotal(data.total || 0);
       setTemplateList(data?.list || []);
     }
@@ -32,7 +33,12 @@ const TemplateSetUpPage: React.FC = () => {
   return (
     <div style={containerStyle}>
       <QaTemplates templateList={templateList} />
-      <PageController currentPage={currentPage} pageSize={pageSize} total={total} setCurrentPage={setCurrentPage}/>
+      <PageController
+        currentPage={currentPage}
+        pageSize={pageSize}
+        total={total}
+        setCurrentPage={setCurrentPage}
+      />
       <AddTemplateBtn />
     </div>
   );

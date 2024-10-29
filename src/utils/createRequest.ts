@@ -1,4 +1,5 @@
 import { ApiVersion, SystemVersion } from "@/common/consts/commonParams";
+import { BusinessCode, ToastCode } from "@/types/common";
 import { message } from "antd";
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
@@ -41,22 +42,28 @@ const createRequest = ({
   request.interceptors.response.use(
     (response) => {
       const responseData = response.data;
-      const { code, message: errorMessage } = responseData;
-      if (code === 101) {
-        message.error(errorMessage);
+      const { toastCode, message: msg } = responseData;
+      if (toastCode === ToastCode.SUCCESS) {
+        message.success(msg);
+      }
+      if (toastCode === ToastCode.WARNING) {
+        message.warning(msg);
+      }
+      if (toastCode === ToastCode.ERROR) {
+        message.error(msg);
       }
       // 对响应数据做一些处理
       return responseData;
     },
     (error) => {
-      const { message: errorMessage } = error;
+      const { message: errorMessage } = error?.response?.data || {};
       message.error(errorMessage);
       // 对响应错误做一些处理
       return {
         success: false,
-        code: -1,
+        code: BusinessCode.ERROR,
         data: null,
-        message,
+        message: errorMessage || "请求失败",
       };
     }
   );

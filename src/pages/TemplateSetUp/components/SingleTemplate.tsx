@@ -11,8 +11,8 @@ const SingleTemplate: React.FC<SingleTemplatePropsType> = (props) => {
     <div className={style.container}>
       <div className={style.contentContainer}>
         <div className={style.infoContainer}>
-          <div className={style.titleText}>{template.templateDesc}</div>
-          <div className={style.descText}>{template.templateDesc}</div>
+          <div className={style.titleText}>{template.name}</div>
+          <div className={style.descText}>{template.desc}</div>
         </div>
         <div className={style.handleBar}>
           <DeleteOutlined className={style.handleBtn} />
