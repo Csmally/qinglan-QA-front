@@ -1,7 +1,7 @@
 interface SingleTemplateType {
   id: string;
-  name: string;
-  desc: string;
+  templateName: string;
+  templateDesc: string;
 }
 
 interface TemplateListResDataType {

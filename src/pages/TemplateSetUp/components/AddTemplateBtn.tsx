@@ -57,6 +57,7 @@ const AddTemplateBtn: React.FC = () => {
           rowValues: row.values as any[],
         });
       });
+      console.log('9898模版', fileTemplate)
       fileListRef.current.push(fileTemplate);
       setFileList(fileListRef.current);
     }

@@ -8,27 +8,27 @@ const getOptionsConfigList = (data: any[]) => {
   const result = [];
 
   for (let i = 0; i < data.length; i += 2) {
-    const optionScore = data[i];
-    const optionText = data[i + 1];
+    const value = data[i];
+    const showText = data[i + 1];
 
     // 将每对元素转换为对象并推入结果数组
-    result.push({ optionText, optionScore });
+    result.push({ value, showText });
   }
 
   return result;
 };
 
-function getScaleQuestionsList(data: any[]) {
-  let scaleOptionsList: string[];
+function getTemplateQuestionsList(data: any[]) {
+  let optionsList: number[];
   if (data?.[1]) {
-    scaleOptionsList = `${data[1]}`.split("，"); // 使用中文逗号拆分
+    optionsList = `${data[1]}`.split("，").map((item: any) => item - 1)
   } else {
-    scaleOptionsList = [];
+    optionsList = [];
   }
   // 返回目标对象
   return {
-    questionName: data[0],
-    scaleoptionsList: scaleOptionsList,
+    questionName: data[0] || GlobalValue.UNKNOWN_VALUE,
+    optionsList,
   };
 }
 
@@ -36,19 +36,19 @@ const formatFileData = (args: FormatFileDataType) => {
   const { fileTemplate, rowNumber, rowValues } = args;
   const realRowValues = rowValues?.slice(1);
   if (rowNumber === 1) {
-    fileTemplate.scaleName = rowValues?.[1];
+    fileTemplate.templateName = rowValues?.[1];
   }
   if (rowNumber === 2) {
-    fileTemplate.scaleDescStr = rowValues?.[1];
+    fileTemplate.templateDesc = rowValues?.[1];
   }
   if (rowNumber === 3) {
     fileTemplate.optionsConfigList = getOptionsConfigList(realRowValues);
   }
   if (rowNumber > 3) {
-    if (!fileTemplate.scaleQuestionsList) {
-      fileTemplate.scaleQuestionsList = [];
+    if (!fileTemplate.questionsList) {
+      fileTemplate.questionsList = [];
     }
-    fileTemplate.scaleQuestionsList.push(getScaleQuestionsList(realRowValues));
+    fileTemplate.questionsList.push(getTemplateQuestionsList(realRowValues));
   }
 };
 

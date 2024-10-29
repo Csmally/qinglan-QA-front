@@ -1,0 +1,41 @@
+{
+    "templateName": "文件名称",
+    "templateDesc": "文件描述",
+    "optionsConfigList": [
+        {
+            "value": 1,
+            "showText": "严重"
+        },
+        {
+            "value": 2,
+            "showText": "轻微"
+        },
+        {
+            "value": 3,
+            "showText": "健康"
+        }
+    ],
+    "questionsList": [
+        {
+            "questionName": "题目1",
+            "optionsList": [
+                0,
+                1
+            ]
+        },
+        {
+            "questionName": "题目2",
+            "optionsList": [
+                0
+            ]
+        },
+        {
+            "questionName": "题目3",
+            "optionsList": [
+                0,
+                1,
+                2
+            ]
+        }
+    ]
+}
