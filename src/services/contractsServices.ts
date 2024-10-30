@@ -18,7 +18,7 @@ const fetchCustomerList = (
 };
 
 const fetchAddCustomer = (params: {
-  customerList: SingleCustomerType;
+  customer: SingleCustomerType;
 }): Promise<ResDataType<any>> => {
   return request.post("customer/add", params);
 };

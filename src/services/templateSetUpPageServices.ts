@@ -26,4 +26,10 @@ const fetchAddTemplate = (params: {
   return request.post("template/add", params);
 };
 
-export { fetchTemplateList, fetchAddTemplate };
+const fetchTemplateListByKeyWord = (params: {
+  keyWord: string;
+}): Promise<ResDataType<TemplateListResDataType>> => {
+  return request.get("template/search/keyword", { params });
+};
+
+export { fetchTemplateList, fetchAddTemplate, fetchTemplateListByKeyWord };
