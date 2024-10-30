@@ -3,7 +3,7 @@ import Customers from "./components/Customers";
 import PageController from "./components/PageController";
 import { SingleCustomerType } from "@/types/fetchResponse";
 import { fetchCustomerList } from "@/services/contractsServices";
-// import AddCustomersBtn from "./components/AddCustomersBtn";
+import AddCustomersBtn from "./components/AddCustomersBtn";
 
 const containerStyle: React.CSSProperties = {
   height: "100%",
@@ -39,10 +39,7 @@ const ContractsPage: React.FC = () => {
         total={total}
         setCurrentPage={setCurrentPage}
       />
-      {/* <AddCustomersBtn
-        setCurrentPage={setCurrentPage}
-        getTemplateList={getTemplateList}
-      /> */}
+      <AddCustomersBtn getCustomerList={getCustomerList} />
     </div>
   );
 };

@@ -5,7 +5,7 @@ interface SingleTemplateType {
 }
 
 interface SingleCustomerType {
-  id: string;
+  id?: string;
   name: string;
   desc: string;
 }

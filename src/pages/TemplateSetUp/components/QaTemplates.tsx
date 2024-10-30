@@ -7,7 +7,7 @@ const containerStyle: React.CSSProperties = {
   display: "grid",
   gridTemplateColumns: "repeat(5, 1fr)",
   gridTemplateRows: "repeat(4, 1fr)",
-  gap: "30px 30px",
+  gap: 30,
 };
 
 interface QaTemplatesPropsType {

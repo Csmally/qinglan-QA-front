@@ -9,7 +9,6 @@ const SiderMenu: React.FC = () => {
   const { pathData } = usePathStore();
   const menus = getMenus(pathData);
   const navigate = useNavigate();
-  console.log("9898menus", menus);
   const navigatePageHandler = (e: any) => {
     navigate(`/${e.key}`, { replace: true });
   };

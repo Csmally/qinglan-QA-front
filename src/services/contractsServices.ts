@@ -16,4 +16,11 @@ const fetchCustomerList = (
 ): Promise<ResDataType<CustomerListResDataType>> => {
   return request.post("customer/search", params);
 };
-export { fetchCustomerList };
+
+const fetchAddCustomer = (params: {
+  customerList: SingleCustomerType;
+}): Promise<ResDataType<any>> => {
+  return request.post("customer/add", params);
+};
+
+export { fetchCustomerList, fetchAddCustomer };
