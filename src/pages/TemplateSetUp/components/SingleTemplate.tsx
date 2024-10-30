@@ -1,6 +1,7 @@
 import { SingleTemplateType } from "@/types/fetchResponse";
 import style from "../styles/singleTemplate.module.css";
 import { DeleteOutlined, EditOutlined, CopyOutlined } from "@ant-design/icons";
+import { memo } from "react";
 
 interface SingleTemplatePropsType {
   template: SingleTemplateType;
@@ -24,4 +25,4 @@ const SingleTemplate: React.FC<SingleTemplatePropsType> = (props) => {
   );
 };
 
-export default SingleTemplate;
+export default memo(SingleTemplate);

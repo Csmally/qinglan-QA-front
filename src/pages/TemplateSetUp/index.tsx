@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import QaTemplates from "./components/QaTemplates";
 import { fetchTemplateList } from "@/services/templateSetUpPageServices";
 import { SingleTemplateType } from "@/types/fetchResponse";
@@ -24,7 +24,7 @@ const TemplateSetUpPage: React.FC = () => {
     });
     if (code === 0) {
       setTotal(data.total || 0);
-      setTemplateList(data?.list || []);
+      setTemplateList(data?.templateList || []);
     }
   }, [currentPage, pageSize]);
   useEffect(() => {
@@ -39,9 +39,9 @@ const TemplateSetUpPage: React.FC = () => {
         total={total}
         setCurrentPage={setCurrentPage}
       />
-      <AddTemplateBtn />
+      <AddTemplateBtn getTemplateList={getTemplateList} />
     </div>
   );
 };
 
-export default TemplateSetUpPage;
+export default memo(TemplateSetUpPage);

@@ -13,21 +13,21 @@ const fetchRouterData = [
   },
   {
     key: "templateSetUp",
-    children: [
-      {
-        key: "test",
-      },
-    ],
+    // children: [
+    //   {
+    //     key: "test",
+    //   },
+    // ],
   },
   {
     key: "contracts",
   },
-  {
-    key: "systemSetUp",
-  },
-  {
-    key: "userSetUp",
-  },
+  // {
+  //   key: "systemSetUp",
+  // },
+  // {
+  //   key: "userSetUp",
+  // },
 ];
 
 const App: React.FC = () => {

@@ -1,6 +1,5 @@
 import { FetchRouterItemType } from "@/types/common";
 import HomePage from "@/pages/Home";
-import TemplateSetUpPage from "@/pages/TemplateSetUp";
 import routers from "@/routers";
 import { MenuProps } from "antd";
 import React from "react";
@@ -47,7 +46,7 @@ const getRouters = (fetchRouters: FetchRouterItemType[]) => {
   const routersMapDatas = getRoutersMap(fetchRouters);
   return (
     <Routes>
-      <Route path="/" element={<TemplateSetUpPage />} />
+      <Route path="/" element={<HomePage />} />
       {routersMapDatas.map((item, index) => (
         <Route path={item.path} element={item.component} key={index} />
       ))}

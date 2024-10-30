@@ -1,5 +1,6 @@
 import { SingleTemplateType } from "@/types/fetchResponse";
 import SingleTemplate from "./SingleTemplate";
+import { memo } from "react";
 
 const containerStyle: React.CSSProperties = {
   flex: 1,
@@ -24,4 +25,4 @@ const QaTemplates: React.FC<QaTemplatesPropsType> = (props) => {
   );
 };
 
-export default QaTemplates;
+export default memo(QaTemplates);

@@ -1,24 +1,27 @@
 import usePathStore from "@/store/pathStore";
 import { getMenus } from "@/utils/getMenuRouters";
 import { Layout, Menu } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Sider } = Layout;
-
-const aa = (e: any) => {
-  console.log("9898eee", e);
-};
 
 const SiderMenu: React.FC = () => {
   const { pathData } = usePathStore();
   const menus = getMenus(pathData);
+  const navigate = useNavigate();
+  console.log("9898menus", menus);
+  const navigatePageHandler = (e: any) => {
+    navigate(`/${e.key}`, { replace: true });
+  };
   return (
     <Sider width={200}>
       <Menu
+        defaultSelectedKeys={["home"]}
         mode="vertical"
         style={{ borderRight: 0, height: "100%" }}
         items={menus}
         theme="dark"
-        onClick={aa}
+        onClick={navigatePageHandler}
       />
     </Sider>
   );

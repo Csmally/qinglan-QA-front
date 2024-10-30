@@ -1,5 +1,50 @@
-const ContractsPage: React.FC = () => {
-  return <div>我是Contracts</div>;
+import { memo, useCallback, useEffect, useState } from "react";
+import Customers from "./components/Customers";
+import PageController from "./components/PageController";
+import { SingleCustomerType } from "@/types/fetchResponse";
+import { fetchCustomerList } from "@/services/contractsServices";
+// import AddCustomersBtn from "./components/AddCustomersBtn";
+
+const containerStyle: React.CSSProperties = {
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
 };
 
-export default ContractsPage;
+const ContractsPage: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  // 暂时写死一次查询20条
+  const pageSize = 20;
+  const [total, setTotal] = useState(0);
+  const [customerList, setCustomerList] = useState<SingleCustomerType[]>([]);
+  const getCustomerList = useCallback(async () => {
+    const { code, data } = await fetchCustomerList({
+      page: currentPage,
+      pageSize,
+    });
+    if (code === 0) {
+      setTotal(data.total || 0);
+      setCustomerList(data?.customerList || []);
+    }
+  }, [currentPage, pageSize]);
+  useEffect(() => {
+    getCustomerList();
+  }, [getCustomerList]);
+  return (
+    <div style={containerStyle}>
+      <Customers customerList={customerList} />
+      <PageController
+        currentPage={currentPage}
+        pageSize={pageSize}
+        total={total}
+        setCurrentPage={setCurrentPage}
+      />
+      {/* <AddCustomersBtn
+        setCurrentPage={setCurrentPage}
+        getTemplateList={getTemplateList}
+      /> */}
+    </div>
+  );
+};
+
+export default memo(ContractsPage);

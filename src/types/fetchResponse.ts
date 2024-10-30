@@ -4,9 +4,10 @@ interface SingleTemplateType {
   desc: string;
 }
 
-interface TemplateListResDataType {
-  total: number;
-  list: SingleTemplateType[] | null;
+interface SingleCustomerType {
+  id: string;
+  name: string;
+  desc: string;
 }
 
-export { SingleTemplateType, TemplateListResDataType };
+export { SingleTemplateType, SingleCustomerType };

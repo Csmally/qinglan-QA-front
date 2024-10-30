@@ -1,6 +1,6 @@
 import { FloatButton, Modal } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
-import { useCallback, useRef, useState } from "react";
+import { memo, useCallback, useRef, useState } from "react";
 import { Upload } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import ExcelJS from "exceljs";
@@ -19,7 +19,11 @@ const fileNameStyle: React.CSSProperties = {
   marginTop: 5,
 };
 
-const AddTemplateBtn: React.FC = () => {
+interface AddTemplateBtnPropsType {
+  getTemplateList: any;
+}
+const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
+  const { getTemplateList } = props;
   const [templateList, setTemplateList] = useState<any[]>([]);
   const templateListRef = useRef<any[]>([]);
   const fileListLengthRef = useRef(0);
@@ -28,18 +32,19 @@ const AddTemplateBtn: React.FC = () => {
   const changeModalVisible = useCallback(
     async (from: string) => {
       if (from === "submit") {
-        const res = await fetchAddTemplate({
+        const { code } = await fetchAddTemplate({
           templateList: templateListRef.current,
         });
-        console.log("9898res", res);
+        if (code === 0) {
+          getTemplateList();
+        }
       }
-      console.log("9898filelist", templateList);
       setModalVisible(false);
       setTemplateList([]);
       templateListRef.current = [];
       fileListLengthRef.current = 0;
     },
-    [templateList]
+    [getTemplateList]
   );
   const onUploadFilds = useCallback(async (info: any) => {
     const { status } = info.file;
@@ -107,4 +112,4 @@ const AddTemplateBtn: React.FC = () => {
   );
 };
 
-export default AddTemplateBtn;
+export default memo(AddTemplateBtn);

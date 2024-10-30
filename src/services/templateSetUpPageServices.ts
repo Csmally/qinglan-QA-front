@@ -1,4 +1,4 @@
-import { TemplateListResDataType } from "@/types/fetchResponse";
+import { SingleTemplateType } from "@/types/fetchResponse";
 import request from "@/utils/request";
 
 /**
@@ -9,15 +9,20 @@ interface FetchTemplateListParamsType {
   pageSize: number;
 }
 
+interface TemplateListResDataType {
+  total: number;
+  templateList: SingleTemplateType[] | null;
+}
+
 const fetchTemplateList = (
   params: FetchTemplateListParamsType
 ): Promise<ResDataType<TemplateListResDataType>> => {
-  return request.post("template/list", params);
+  return request.post("template/search", params);
 };
 
 const fetchAddTemplate = (params: {
   templateList: any[];
-}): Promise<ResDataType<TemplateListResDataType>> => {
+}): Promise<ResDataType<any>> => {
   return request.post("template/add", params);
 };
 
