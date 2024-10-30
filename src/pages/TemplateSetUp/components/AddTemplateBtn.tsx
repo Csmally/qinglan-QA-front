@@ -15,26 +15,32 @@ const addBtnStyle: React.CSSProperties = {
 };
 
 const fileNameStyle: React.CSSProperties = {
-  color: 'green',
+  color: "green",
   marginTop: 5,
-}
+};
 
 const AddTemplateBtn: React.FC = () => {
-  const [fileList, setFileList] = useState<any[]>([]);
-  const fileListRef = useRef<any[]>([]);
+  const [templateList, setTemplateList] = useState<any[]>([]);
+  const templateListRef = useRef<any[]>([]);
   const fileListLengthRef = useRef(0);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const changeModalVisible = useCallback(async (from: string) => {
-    if (from === "submit") {
-      const res = await fetchAddTemplate({ fileList: fileListRef.current });
-      console.log("9898res", res);
-    }
-    setModalVisible(false);
-    setFileList([]);
-    fileListRef.current = [];
-    fileListLengthRef.current = 0;
-  }, []);
+  const changeModalVisible = useCallback(
+    async (from: string) => {
+      if (from === "submit") {
+        const res = await fetchAddTemplate({
+          templateList: templateListRef.current,
+        });
+        console.log("9898res", res);
+      }
+      console.log("9898filelist", templateList);
+      setModalVisible(false);
+      setTemplateList([]);
+      templateListRef.current = [];
+      fileListLengthRef.current = 0;
+    },
+    [templateList]
+  );
   const onUploadFilds = useCallback(async (info: any) => {
     const { status } = info.file;
     if (status === "error") {
@@ -58,8 +64,8 @@ const AddTemplateBtn: React.FC = () => {
           rowValues: row.values as any[],
         });
       });
-      fileListRef.current.push(fileTemplate);
-      setFileList(fileListRef.current);
+      templateListRef.current.push(fileTemplate);
+      setTemplateList(templateListRef.current);
     }
   }, []);
   return (
@@ -84,8 +90,10 @@ const AddTemplateBtn: React.FC = () => {
           <p className="ant-upload-hint">支持多个文件同时上传</p>
         </Dragger>
         <div>
-          {fileList.map((t: any, index: number) => (
-            <div key={index} style={fileNameStyle}>{t.name}</div>
+          {templateList.map((t: any, index: number) => (
+            <div key={index} style={fileNameStyle}>
+              {t.name}
+            </div>
           ))}
         </div>
       </Modal>

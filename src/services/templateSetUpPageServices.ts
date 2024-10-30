@@ -16,7 +16,7 @@ const fetchTemplateList = (
 };
 
 const fetchAddTemplate = (params: {
-  fileList: any[];
+  templateList: any[];
 }): Promise<ResDataType<TemplateListResDataType>> => {
   return request.post("template/add", params);
 };
