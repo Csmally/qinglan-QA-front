@@ -14,6 +14,11 @@ const addBtnStyle: React.CSSProperties = {
   marginBottom: 50,
 };
 
+const fileNameStyle: React.CSSProperties = {
+  color: 'green',
+  marginTop: 5,
+}
+
 const AddTemplateBtn: React.FC = () => {
   const [fileList, setFileList] = useState<any[]>([]);
   const fileListRef = useRef<any[]>([]);
@@ -80,7 +85,7 @@ const AddTemplateBtn: React.FC = () => {
         </Dragger>
         <div>
           {fileList.map((t: any, index: number) => (
-            <div key={index}>{t.name}</div>
+            <div key={index} style={fileNameStyle}>{t.name}</div>
           ))}
         </div>
       </Modal>
