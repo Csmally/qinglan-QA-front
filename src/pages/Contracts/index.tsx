@@ -24,7 +24,7 @@ const ContractsPage: React.FC = () => {
     });
     if (code === 0) {
       setTotal(data.total || 0);
-      setCustomerList(data?.customerList || []);
+      setCustomerList(data?.list || []);
     }
   }, [currentPage, pageSize]);
   useEffect(() => {

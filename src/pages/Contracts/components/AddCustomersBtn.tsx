@@ -18,6 +18,7 @@ const AddCustomersBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [customerName, setCustomerName] = useState<string>("");
   const [customerDesc, setCustomerDesc] = useState<string>("");
+  const [templateId, setTemplateId] = useState<string>("");
   const changeModalVisible = useCallback(
     async (from: string) => {
       if (from === "submit") {
@@ -29,10 +30,15 @@ const AddCustomersBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
           message.error("请输入客户描述与备注");
           return;
         }
+        if (!templateId) {
+          message.error("请选择题库");
+          return;
+        }
         const { code } = await fetchAddCustomer({
           customer: {
             name: customerName,
             desc: customerDesc,
+            templateId,
           },
         });
         if (code === 0) {
@@ -42,8 +48,9 @@ const AddCustomersBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
       setModalVisible(false);
       setCustomerName("");
       setCustomerDesc("");
+      setTemplateId("");
     },
-    [customerDesc, customerName, getCustomerList]
+    [customerDesc, customerName, getCustomerList, templateId]
   );
   const changeCustomerNameHandle = useCallback((e: any) => {
     setCustomerName(e.target.value);
@@ -55,6 +62,7 @@ const AddCustomersBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
     <div>
       <Modal
         title="添加客户"
+        destroyOnClose
         open={modalVisible}
         onOk={() => changeModalVisible("submit")}
         onCancel={() => changeModalVisible("cancel")}
@@ -83,7 +91,7 @@ const AddCustomersBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
           </div>
           <div className={styles.customerInfoContainer}>
             <div className={styles.label}>题库：</div>
-            <SelectWithFetch />
+            <SelectWithFetch setTemplateId={setTemplateId} />
           </div>
         </div>
       </Modal>

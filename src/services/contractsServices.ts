@@ -8,7 +8,7 @@ interface FetchCustomerListParamsType {
 
 interface CustomerListResDataType {
   total: number;
-  customerList: SingleCustomerType[] | null;
+  list: SingleCustomerType[] | null;
 }
 
 const fetchCustomerList = (
@@ -18,7 +18,7 @@ const fetchCustomerList = (
 };
 
 const fetchAddCustomer = (params: {
-  customer: SingleCustomerType;
+  customer: SingleCustomerType & { templateId: string };
 }): Promise<ResDataType<any>> => {
   return request.post("customer/add", params);
 };

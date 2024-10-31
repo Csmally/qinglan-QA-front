@@ -4,13 +4,13 @@ import { Select, Spin } from "antd";
 import { useCallback, useState } from "react";
 import styles from "../styles/addCustomer.module.css";
 
-const SelectOption = (props: any) => {
-  console.log("9898pp", props);
-  return <div>{props.data.name}</div>;
-};
-
-const SelectWithFetch: React.FC = () => {
+interface SelectWithFetchPropsType {
+  setTemplateId: any;
+}
+const SelectWithFetch: React.FC<SelectWithFetchPropsType> = (props) => {
+  const { setTemplateId } = props;
   const [loading, setLoading] = useState(false);
+  const [label, setLabel] = useState("");
   const [templates, setTemplates] = useState<SingleTemplateType[]>([]);
   const fetchTemplateByKeyWord = useCallback(async (keyWord: string) => {
     setLoading(true);
@@ -19,23 +19,26 @@ const SelectWithFetch: React.FC = () => {
     });
     setLoading(false);
     if (code === 0) {
+      data?.templateList?.forEach((item) => {
+        (item as any).label = item.name;
+        (item as any).value = item.id;
+      });
       setTemplates(data?.templateList || []);
     }
   }, []);
   return (
     <Select
       className={styles.inputContainer}
-      labelInValue
       showSearch
+      value={label}
+      labelInValue
       filterOption={false}
       onSearch={fetchTemplateByKeyWord}
       notFoundContent={loading ? <Spin size="small" /> : null}
       options={templates}
-      optionRender={(props, info) => (
-        <SelectOption {...props} key={info.index} />
-      )}
-      onChange={(newValue) => {
-        console.log("9898newValue", newValue);
+      onSelect={(option: any) => {
+        setLabel(option.label);
+        setTemplateId(option.value);
       }}
     />
   );

@@ -1,10 +1,10 @@
 import { FetchRouterItemType } from "@/types/common";
-// import HomePage from "@/pages/Home";
+import HomePage from "@/pages/Home";
 import routers from "@/routers";
 import { MenuProps } from "antd";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Contracts from "@/pages/Contracts";
+// import Contracts from "@/pages/Contracts";
 
 interface RouterMapDataItemType {
   path: string;
@@ -47,7 +47,7 @@ const getRouters = (fetchRouters: FetchRouterItemType[]) => {
   const routersMapDatas = getRoutersMap(fetchRouters);
   return (
     <Routes>
-      <Route path="/" element={<Contracts />} />
+      <Route path="/" element={<HomePage />} />
       {routersMapDatas.map((item, index) => (
         <Route path={item.path} element={item.component} key={index} />
       ))}

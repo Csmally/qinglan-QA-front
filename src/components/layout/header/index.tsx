@@ -1,5 +1,6 @@
 import { Avatar, Layout } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import style from "./index.module.css";
 
 const { Header } = Layout;
 
@@ -14,7 +15,7 @@ const LayoutHeader: React.FC = () => {
         padding: 20,
       }}
     >
-      <div>清岚logo</div>
+      <div className={style.headerImg} />
       <Avatar size={60} icon={<UserOutlined />} />
     </Header>
   );
