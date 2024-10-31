@@ -10,7 +10,7 @@ const getTemplateConfigs = (data: any[]) => {
   const result = [];
 
   for (let i = 0; i < data.length; i += 2) {
-    const value = data[i];
+    const value = `${data[i]}`;
     const showText = data[i + 1];
 
     // 将每对元素转换为对象并推入结果数组
@@ -20,7 +20,7 @@ const getTemplateConfigs = (data: any[]) => {
   return result;
 };
 
-function getTemplateQuestionsList(data: any[], optionsConfigList: any[], groupsConfigList: any[]) {
+function getTemplateQuestion(data: any[], optionsConfigList: any[], groupsConfigList: any[]) {
   let optionsList: any[];
   if (data?.[1]) {
     optionsList = `${data[1]}`.split("，").map((item: any) => optionsConfigList[item-1]);
@@ -31,7 +31,7 @@ function getTemplateQuestionsList(data: any[], optionsConfigList: any[], groupsC
   return {
     questionName: data[0] || GlobalValue.UNKNOWN_VALUE,
     optionsList,
-    groupBy: groupsConfigList[data[2]-1],
+    groupBy: groupsConfigList[data[2]-1].value,
     isJudge: data[3] ? true : false,
   };
 }
@@ -56,7 +56,7 @@ const formatFileData = (args: FormatFileDataType) => {
       fileTemplate.questionsList = [];
     }
     fileTemplate.questionsList.push(
-      getTemplateQuestionsList(realRowValues, fileTemplate.optionsConfigList, fileTemplate.groupsConfigList)
+      getTemplateQuestion(realRowValues, fileTemplate.optionsConfigList, fileTemplate.groupsConfigList)
     );
   }
 };

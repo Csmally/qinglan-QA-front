@@ -56,7 +56,7 @@ const createRequest = ({
       return responseData;
     },
     (error) => {
-      const { message: errorMessage } = error?.response?.data || {};
+      const { message: errorMessage = '网络连接错误' } = error?.response?.data || {};
       message.error(errorMessage);
       // 对响应错误做一些处理
       return {

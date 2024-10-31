@@ -1,4 +1,4 @@
-import { FloatButton, Modal } from "antd";
+import { FloatButton, message, Modal } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { memo, useCallback, useRef, useState } from "react";
 import { Upload } from "antd";
@@ -25,15 +25,21 @@ interface AddTemplateBtnPropsType {
 const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
   const { getTemplateList } = props;
   const [templateList, setTemplateList] = useState<any[]>([]);
-  const templateListRef = useRef<any[]>([]);
   const fileListLengthRef = useRef(0);
 
   const [modalVisible, setModalVisible] = useState(false);
   const changeModalVisible = useCallback(
     async (from: string) => {
       if (from === "submit") {
+        if (templateList.length === 0) {
+          message.error('请上传题库')
+          return;
+        } else if (templateList.length !== fileListLengthRef.current) {
+          message.error('有文件上传失败')
+          return;
+        }
         const { code } = await fetchAddTemplate({
-          templateList: templateListRef.current,
+          templateList: templateList,
         });
         if (code === 0) {
           getTemplateList();
@@ -41,15 +47,14 @@ const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
       }
       setModalVisible(false);
       setTemplateList([]);
-      templateListRef.current = [];
       fileListLengthRef.current = 0;
     },
-    [getTemplateList]
+    [getTemplateList, templateList]
   );
   const onUploadFilds = useCallback(async (info: any) => {
     const { status } = info.file;
     if (status === "error") {
-      fileListLengthRef.current = info.fileList.length;
+      fileListLengthRef.current ++;
       // 模版数据源头
       const fileTemplate = {};
       // 创建工作簿实例
@@ -69,8 +74,7 @@ const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
           rowValues: row.values as any[],
         });
       });
-      templateListRef.current.push(fileTemplate);
-      setTemplateList(templateListRef.current);
+      setTemplateList((list) => [...list, fileTemplate])
     }
   }, []);
   return (
