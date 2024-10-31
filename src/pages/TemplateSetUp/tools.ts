@@ -20,20 +20,29 @@ const getTemplateConfigs = (data: any[]) => {
   return result;
 };
 
-function getTemplateQuestion(data: any[], optionsConfigList: any[], groupsConfigList: any[]) {
-  let optionsList: any[];
+function getTemplateQuestion(
+  data: any[],
+  optionsConfigList: any[],
+  groupOptions: any[]
+) {
+  let questionOptions: any[];
   if (data?.[1]) {
-    optionsList = `${data[1]}`.split("，").map((item: any) => optionsConfigList[item-1]);
+    questionOptions = `${data[1]}`
+      .split("，")
+      .map((item: any) => optionsConfigList[item - 1]);
   } else {
-    optionsList = [];
+    questionOptions = [];
   }
   // 返回目标对象
-  return {
+  const question = {
     questionName: data[0] || GlobalValue.UNKNOWN_VALUE,
-    optionsList,
-    groupBy: groupsConfigList[data[2]-1].value,
+    questionOptions,
     isJudge: data[3] ? true : false,
   };
+  if (!groupOptions[data[2] - 1].questions) {
+    groupOptions[data[2] - 1].questions = [];
+  }
+  groupOptions[data[2] - 1].questions.push(question);
 }
 
 const formatFileData = (args: FormatFileDataType) => {
@@ -49,14 +58,13 @@ const formatFileData = (args: FormatFileDataType) => {
     fileTemplate.optionsConfigList = getTemplateConfigs(realRowValues);
   }
   if (rowNumber === 4) {
-    fileTemplate.groupsConfigList = getTemplateConfigs(realRowValues);
+    fileTemplate.groupOptions = getTemplateConfigs(realRowValues);
   }
   if (rowNumber > 4) {
-    if (!fileTemplate.questionsList) {
-      fileTemplate.questionsList = [];
-    }
-    fileTemplate.questionsList.push(
-      getTemplateQuestion(realRowValues, fileTemplate.optionsConfigList, fileTemplate.groupsConfigList)
+    getTemplateQuestion(
+      realRowValues,
+      fileTemplate.optionsConfigList,
+      fileTemplate.groupOptions
     );
   }
 };

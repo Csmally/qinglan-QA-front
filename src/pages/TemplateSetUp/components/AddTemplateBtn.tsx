@@ -32,10 +32,10 @@ const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
     async (from: string) => {
       if (from === "submit") {
         if (templateList.length === 0) {
-          message.error('请上传题库')
+          message.error("请上传题库");
           return;
         } else if (templateList.length !== fileListLengthRef.current) {
-          message.error('有文件上传失败')
+          message.error("有文件上传失败");
           return;
         }
         const { code } = await fetchAddTemplate({
@@ -54,7 +54,7 @@ const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
   const onUploadFilds = useCallback(async (info: any) => {
     const { status } = info.file;
     if (status === "error") {
-      fileListLengthRef.current ++;
+      fileListLengthRef.current++;
       // 模版数据源头
       const fileTemplate = {};
       // 创建工作簿实例
@@ -74,7 +74,7 @@ const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
           rowValues: row.values as any[],
         });
       });
-      setTemplateList((list) => [...list, fileTemplate])
+      setTemplateList((list) => [...list, fileTemplate]);
     }
   }, []);
   return (

@@ -4,7 +4,6 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import { fetchAddCustomer } from "@/services/contractsServices";
 import styles from "../styles/addCustomer.module.css";
 import SelectWithFetch from "./SelectWithFetch";
-import { fetchTemplateById } from "@/services/templateSetUpPageServices";
 
 const addBtnStyle: React.CSSProperties = {
   marginRight: 50,
@@ -39,11 +38,6 @@ const AddCustomersBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
         if (code === 0) {
           getCustomerList();
         }
-      } else {
-        const { code, data } = await fetchTemplateById({
-          id: '1',
-        });
-        console.log('9898查询', code, data)
       }
       setModalVisible(false);
       setCustomerName("");
