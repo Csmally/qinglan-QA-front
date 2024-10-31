@@ -32,4 +32,10 @@ const fetchTemplateListByKeyWord = (params: {
   return request.get("template/search/keyword", { params });
 };
 
-export { fetchTemplateList, fetchAddTemplate, fetchTemplateListByKeyWord };
+const fetchTemplateById = (params: {
+  id: string;
+}): Promise<ResDataType<TemplateListResDataType>> => {
+  return request.get("template/search/id", { params });
+};
+
+export { fetchTemplateList, fetchAddTemplate, fetchTemplateListByKeyWord, fetchTemplateById };
