@@ -1,11 +1,9 @@
-import usePathStore from "@/store/pathStore";
 import { getRouters } from "@/utils/getMenuRouters";
 import { Layout } from "antd";
 
 const { Content } = Layout;
 
 const MainContainer: React.FC = () => {
-  const { pathData } = usePathStore();
   return (
     <Content
       style={{
@@ -16,7 +14,7 @@ const MainContainer: React.FC = () => {
         borderRadius: "0 0 10px 10px",
       }}
     >
-      {getRouters(pathData)}
+      {getRouters()}
     </Content>
   );
 };

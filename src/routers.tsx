@@ -13,33 +13,35 @@ import SystemSetUpPage from "@/pages/SystemSetUp";
 import UserSetUpPage from "@/pages/UserSetUp";
 import HomePage from "@/pages/Home";
 import TestPage from "@/pages/Test";
-
-interface RouterItemType {
-  key: string;
-  label: string;
-  icon?: React.ReactNode;
-  component?: React.ReactNode;
-  // children?: RouterItemType[];
-}
+import ContractsClassPage from "@/pages/ContractsClass";
 
 const routers: RouterItemType[] = [
   {
     key: "home",
     label: "数据面板",
+    isMenu: true,
     icon: <DashboardOutlined />,
     component: <HomePage />,
   },
   {
     key: "templateSetUp",
     label: "模版配置",
+    isMenu: true,
     icon: <BookOutlined />,
     component: <TemplateSetUpPage />,
   },
   {
     key: "contracts",
     label: "签约客户",
+    isMenu: true,
     icon: <UsergroupAddOutlined />,
     component: <ContractsPage />,
+  },
+  {
+    key: "studentsSetUp",
+    label: "学生配置",
+    params: ["id"],
+    component: <ContractsClassPage />,
   },
   {
     key: "systemSetUp",
@@ -50,6 +52,7 @@ const routers: RouterItemType[] = [
   {
     key: "userSetUp",
     label: "我的设置",
+    isMenu: true,
     icon: <UserOutlined />,
     component: <UserSetUpPage />,
   },

@@ -1,9 +1,8 @@
-import { FetchRouterItemType } from "@/types/common";
 import { create } from "zustand";
 
 interface PathStoreType {
-  pathData: FetchRouterItemType[]; // 类型化 pathData
-  setPathData: (pathData: FetchRouterItemType[]) => void; // 类型化 setPathData
+  pathData: RouterItemType[]; // 类型化 pathData
+  setPathData: (pathData: RouterItemType[]) => void; // 类型化 setPathData
 }
 
 const usePathStore = create<PathStoreType>((set) => ({

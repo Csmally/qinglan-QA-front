@@ -6,29 +6,7 @@ import MainPageView from "@/components/layout/mainPageView";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useEffect, useState } from "react";
 import usePathStore from "@/store/pathStore";
-
-const fetchRouterData = [
-  {
-    key: "home",
-  },
-  {
-    key: "templateSetUp",
-    // children: [
-    //   {
-    //     key: "test",
-    //   },
-    // ],
-  },
-  {
-    key: "contracts",
-  },
-  // {
-  //   key: "systemSetUp",
-  // },
-  // {
-  //   key: "userSetUp",
-  // },
-];
+import routers from "@/routers";
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -36,7 +14,7 @@ const App: React.FC = () => {
   // 获取服务端路由配置
   useEffect(() => {
     // 设置后端获取的path配置存入全局store
-    setPathData(fetchRouterData);
+    setPathData(routers);
     setLoading(false);
   }, [setPathData]);
   return (

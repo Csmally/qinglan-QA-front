@@ -1,8 +1,3 @@
-interface FetchRouterItemType {
-  key: string;
-  children?: FetchRouterItemType[];
-}
-
 enum GlobalValue {
   UNKNOWN_VALUE = "unknown",
 }
@@ -20,4 +15,4 @@ enum BusinessCode {
   ERROR = -1,
 }
 
-export { FetchRouterItemType, GlobalValue, ToastCode, BusinessCode };
+export { GlobalValue, ToastCode, BusinessCode };

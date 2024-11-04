@@ -1,55 +1,45 @@
-import { FetchRouterItemType } from "@/types/common";
 import HomePage from "@/pages/Home";
 import routers from "@/routers";
 import { MenuProps } from "antd";
-import React from "react";
 import { Routes, Route } from "react-router-dom";
-// import Contracts from "@/pages/Contracts";
-
-interface RouterMapDataItemType {
-  path: string;
-  component: React.ReactNode;
-}
 
 // 设置菜单路由
-const getMenus = (fetchRouters: FetchRouterItemType[]): MenuProps["items"] =>
-  fetchRouters.map((menuItem) => {
-    const singleMenu = routers.find((item) => item.key === menuItem.key)!;
-    return {
-      key: singleMenu.key,
-      label: singleMenu.label,
-      icon: singleMenu.icon,
-      children: menuItem.children ? getMenus(menuItem.children) : undefined,
-    };
-  });
-
-// 设置路由数据
-const getRoutersMap = (fetchRouters: FetchRouterItemType[]) => {
-  const result: RouterMapDataItemType[] = [];
-  fetchRouters.forEach((item) => {
-    if (item.children) {
-      result.push(...getRoutersMap(item.children));
-    } else {
-      const routeritem = routers.find(
-        (routerItem) => routerItem.key === item.key
-      )!;
-      result.push({
-        path: `/${routeritem.key}`,
-        component: routeritem.component,
+const getMenus = (fetchRouters: RouterItemType[]): MenuProps["items"] => {
+  const menuArr: MenuProps["items"] = [];
+  fetchRouters.forEach((menuItem) => {
+    if (menuItem.isMenu) {
+      const singleMenu = routers.find((item) => item.key === menuItem.key)!;
+      menuArr.push({
+        key: singleMenu.key,
+        label: singleMenu.label,
+        icon: singleMenu.icon,
       });
     }
   });
-  return result;
+  return menuArr;
 };
 
+// 设置每个router的是否带参数路由
+const getRouterPath = (router: RouterItemType): string => {
+  let paramsPath = `/${router.key}`;
+  if (router.params) {
+    router.params.forEach((param) => {
+      paramsPath += `/:${param}`;
+    });
+  }
+  return paramsPath;
+};
 // 设置路由组件
-const getRouters = (fetchRouters: FetchRouterItemType[]) => {
-  const routersMapDatas = getRoutersMap(fetchRouters);
+const getRouters = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      {routersMapDatas.map((item, index) => (
-        <Route path={item.path} element={item.component} key={index} />
+      {routers.map((router, index) => (
+        <Route
+          path={getRouterPath(router)}
+          element={router.component}
+          key={index}
+        />
       ))}
     </Routes>
   );
