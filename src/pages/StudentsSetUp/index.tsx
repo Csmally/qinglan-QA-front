@@ -1,7 +1,7 @@
 import { memo, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const ContractsClassPage: React.FC = () => {
+const StudentsSetUp: React.FC = () => {
   const { id } = useParams();
   useEffect(() => {
     console.log("9898id-bb", id);
@@ -9,4 +9,4 @@ const ContractsClassPage: React.FC = () => {
   return <div>我身上时</div>;
 };
 
-export default memo(ContractsClassPage);
+export default memo(StudentsSetUp);

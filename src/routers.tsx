@@ -13,7 +13,7 @@ import SystemSetUpPage from "@/pages/SystemSetUp";
 import UserSetUpPage from "@/pages/UserSetUp";
 import HomePage from "@/pages/Home";
 import TestPage from "@/pages/Test";
-import ContractsClassPage from "@/pages/ContractsClass";
+import StudentsSetUp from "@/pages/StudentsSetUp";
 
 const routers: RouterItemType[] = [
   {
@@ -41,7 +41,7 @@ const routers: RouterItemType[] = [
     key: "studentsSetUp",
     label: "学生配置",
     params: ["id"],
-    component: <ContractsClassPage />,
+    component: <StudentsSetUp />,
   },
   {
     key: "systemSetUp",
