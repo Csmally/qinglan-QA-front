@@ -1,3 +1,4 @@
+// import ClassSetUp from "@/pages/ClassSetUp";
 import HomePage from "@/pages/Home";
 import routers from "@/routers";
 import { MenuProps } from "antd";
@@ -34,6 +35,7 @@ const getRouters = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      {/* <Route path="/" element={<ClassSetUp />} /> */}
       {routers.map((router, index) => (
         <Route
           path={getRouterPath(router)}

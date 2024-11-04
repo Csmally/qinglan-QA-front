@@ -1,9 +1,6 @@
 import { SingleTemplateType } from "@/types/fetchResponse";
 import request from "@/utils/request";
 
-/**
- * 添加模版
- */
 interface FetchTemplateListParamsType {
   page: number;
   pageSize: number;
@@ -38,4 +35,9 @@ const fetchTemplateById = (params: {
   return request.get("template/search/id", { params });
 };
 
-export { fetchTemplateList, fetchAddTemplate, fetchTemplateListByKeyWord, fetchTemplateById };
+export {
+  fetchTemplateList,
+  fetchAddTemplate,
+  fetchTemplateListByKeyWord,
+  fetchTemplateById,
+};

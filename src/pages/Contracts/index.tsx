@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useState } from "react";
 import Customers from "./components/Customers";
-import PageController from "./components/PageController";
+import PageController from "@/components/widgets/PageController";
 import { SingleCustomerType } from "@/types/fetchResponse";
 import { fetchCustomerList } from "@/services/contractsServices";
 import AddCustomersBtn from "./components/AddCustomersBtn";
@@ -39,7 +39,7 @@ const ContractsPage: React.FC = () => {
         total={total}
         setCurrentPage={setCurrentPage}
       />
-      <AddCustomersBtn getCustomerList={getCustomerList} />
+      <AddCustomersBtn setCurrentPage={setCurrentPage} />
     </div>
   );
 };

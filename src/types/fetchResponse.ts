@@ -8,6 +8,16 @@ interface SingleCustomerType {
   id?: string;
   name: string;
   desc: string;
+  templateId?: string;
 }
 
-export { SingleTemplateType, SingleCustomerType };
+interface SingleClassType {
+  id?: string;
+  grade: string;
+  gradeText: string;
+  class: string;
+  classText: string;
+  customerId?: string;
+}
+
+export { SingleTemplateType, SingleCustomerType, SingleClassType };

@@ -20,10 +20,10 @@ const fileNameStyle: React.CSSProperties = {
 };
 
 interface AddTemplateBtnPropsType {
-  getTemplateList: any;
+  setCurrentPage: any;
 }
 const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
-  const { getTemplateList } = props;
+  const { setCurrentPage } = props;
   const [templateList, setTemplateList] = useState<any[]>([]);
   const fileListLengthRef = useRef(0);
 
@@ -42,14 +42,14 @@ const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
           templateList: templateList,
         });
         if (code === 0) {
-          getTemplateList();
+          setCurrentPage(1);
         }
       }
       setModalVisible(false);
       setTemplateList([]);
       fileListLengthRef.current = 0;
     },
-    [getTemplateList, templateList]
+    [setCurrentPage, templateList]
   );
   const onUploadFilds = useCallback(async (info: any) => {
     const { status } = info.file;

@@ -11,10 +11,10 @@ const addBtnStyle: React.CSSProperties = {
 };
 
 interface AddTemplateBtnPropsType {
-  getCustomerList: any;
+  setCurrentPage: any;
 }
 const AddCustomersBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
-  const { getCustomerList } = props;
+  const { setCurrentPage } = props;
   const [modalVisible, setModalVisible] = useState(false);
   const [customerName, setCustomerName] = useState<string>("");
   const [customerDesc, setCustomerDesc] = useState<string>("");
@@ -42,7 +42,7 @@ const AddCustomersBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
           },
         });
         if (code === 0) {
-          getCustomerList();
+          setCurrentPage();
         }
       }
       setModalVisible(false);
@@ -50,7 +50,7 @@ const AddCustomersBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
       setCustomerDesc("");
       setTemplateId("");
     },
-    [customerDesc, customerName, getCustomerList, templateId]
+    [customerDesc, customerName, setCurrentPage, templateId]
   );
   const changeCustomerNameHandle = useCallback((e: any) => {
     setCustomerName(e.target.value);

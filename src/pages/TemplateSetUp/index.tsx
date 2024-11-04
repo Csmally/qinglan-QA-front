@@ -3,7 +3,7 @@ import QaTemplates from "./components/QaTemplates";
 import { fetchTemplateList } from "@/services/templateSetUpPageServices";
 import { SingleTemplateType } from "@/types/fetchResponse";
 import AddTemplateBtn from "./components/AddTemplateBtn";
-import PageController from "./components/PageController";
+import PageController from "@/components/widgets/PageController";
 
 const containerStyle: React.CSSProperties = {
   height: "100%",
@@ -39,7 +39,7 @@ const TemplateSetUpPage: React.FC = () => {
         total={total}
         setCurrentPage={setCurrentPage}
       />
-      <AddTemplateBtn getTemplateList={getTemplateList} />
+      <AddTemplateBtn setCurrentPage={setCurrentPage} />
     </div>
   );
 };
