@@ -6,7 +6,6 @@ import {
   DashboardOutlined,
   BugOutlined,
 } from "@ant-design/icons";
-import React from "react";
 import TemplateSetUpPage from "@/pages/TemplateSetUp";
 import ContractsPage from "@/pages/Contracts";
 import SystemSetUpPage from "@/pages/SystemSetUp";
