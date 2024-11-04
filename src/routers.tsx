@@ -13,6 +13,7 @@ import UserSetUpPage from "@/pages/UserSetUp";
 import HomePage from "@/pages/Home";
 import TestPage from "@/pages/Test";
 import StudentsSetUp from "@/pages/StudentsSetUp";
+import ClassSetUpPage from "@/pages/ClassSetUp";
 
 const routers: RouterItemType[] = [
   {
@@ -35,6 +36,12 @@ const routers: RouterItemType[] = [
     isMenu: true,
     icon: <UsergroupAddOutlined />,
     component: <ContractsPage />,
+  },
+  {
+    key: "classSetUp",
+    label: "班级配置",
+    params: ["id"],
+    component: <ClassSetUpPage />,
   },
   {
     key: "studentsSetUp",

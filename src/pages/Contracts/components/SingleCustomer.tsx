@@ -11,7 +11,7 @@ const SingleCustomer: React.FC<SingleCustomerPropsType> = (props) => {
   const { customer } = props;
   const navigate = useNavigate();
   const jumpToClassSettingPage = () => {
-    navigate(`/studentsSetUp/${customer.id}`, { replace: true });
+    navigate(`/classSetUp/${customer.id}`, { replace: true });
   };
   return (
     <div className={style.container} onClick={jumpToClassSettingPage}>
