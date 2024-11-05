@@ -1,5 +1,3 @@
-// import ClassSetUp from "@/pages/ClassSetUp";
-import HomePage from "@/pages/Home";
 import routers from "@/routers";
 import { MenuProps } from "antd";
 import { Routes, Route } from "react-router-dom";
@@ -9,11 +7,10 @@ const getMenus = (fetchRouters: RouterItemType[]): MenuProps["items"] => {
   const menuArr: MenuProps["items"] = [];
   fetchRouters.forEach((menuItem) => {
     if (menuItem.isMenu) {
-      const singleMenu = routers.find((item) => item.key === menuItem.key)!;
       menuArr.push({
-        key: singleMenu.key,
-        label: singleMenu.label,
-        icon: singleMenu.icon,
+        key: menuItem.key,
+        label: menuItem.label,
+        icon: menuItem.icon,
       });
     }
   });
@@ -22,7 +19,7 @@ const getMenus = (fetchRouters: RouterItemType[]): MenuProps["items"] => {
 
 // 设置每个router的是否带参数路由
 const getRouterPath = (router: RouterItemType): string => {
-  let paramsPath = `/${router.key}`;
+  let paramsPath = router.key;
   if (router.params) {
     router.params.forEach((param) => {
       paramsPath += `/:${param}`;
@@ -34,8 +31,6 @@ const getRouterPath = (router: RouterItemType): string => {
 const getRouters = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      {/* <Route path="/" element={<ClassSetUp />} /> */}
       {routers.map((router, index) => (
         <Route
           path={getRouterPath(router)}

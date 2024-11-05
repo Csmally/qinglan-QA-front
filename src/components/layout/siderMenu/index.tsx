@@ -1,4 +1,5 @@
 import usePathStore from "@/store/pathStore";
+import { PAGE_PATH } from "@/types/common";
 import { getMenus } from "@/utils/getMenuRouters";
 import { Layout, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -10,12 +11,12 @@ const SiderMenu: React.FC = () => {
   const menus = getMenus(pathData);
   const navigate = useNavigate();
   const navigatePageHandler = (e: any) => {
-    navigate(`/${e.key}`, { replace: true });
+    navigate(e.key, { replace: true });
   };
   return (
     <Sider width={200}>
       <Menu
-        defaultSelectedKeys={["home"]}
+        defaultSelectedKeys={[PAGE_PATH.HOME]}
         mode="vertical"
         style={{ borderRight: 0, height: "100%" }}
         items={menus}

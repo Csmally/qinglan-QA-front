@@ -6,6 +6,7 @@ import { fetchClassList } from "@/services/classSetUpPageServices";
 import AddClassBtn from "./components/AddClassBtn";
 import { SearchOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { PAGE_PATH } from "@/types/common";
 
 const containerStyle: React.CSSProperties = {
   height: "100%",
@@ -42,7 +43,7 @@ const ClassSetUpPage: React.FC = () => {
     getClassList();
   }, [getClassList, fetchCount]);
   const jumpToStudentPage = useCallback((text: any, record: any) => {
-    navigate(`/studentsSetUp/${record.id}`, { replace: true });
+    navigate(`/page/${PAGE_PATH.STUDENT_SETUP}/${record.id}`, { replace: true });
   }, [navigate]);
   // 表格列设置
   const columns: TableProps<SingleClassType>["columns"] = [

@@ -11,7 +11,7 @@ const containerStyle: React.CSSProperties = {
   flexDirection: "column",
 };
 
-const ContractsPage: React.FC = () => {
+const ContractSetUpPage: React.FC = () => {
   const [fetchCount, setFetchCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   // 暂时写死一次查询20条
@@ -52,4 +52,4 @@ const ContractsPage: React.FC = () => {
   );
 };
 
-export default memo(ContractsPage);
+export default memo(ContractSetUpPage);

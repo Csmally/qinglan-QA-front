@@ -10,9 +10,10 @@ const LayoutFooter: React.FC = () => {
         alignItems: "center",
         justifyContent: "center",
         padding: 10,
+        color: '#9e9e9e'
       }}
     >
-      清岚问卷
+      —— 清岚问卷 ——
     </Footer>
   );
 };

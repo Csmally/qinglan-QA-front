@@ -7,63 +7,64 @@ import {
   BugOutlined,
 } from "@ant-design/icons";
 import TemplateSetUpPage from "@/pages/TemplateSetUp";
-import ContractsPage from "@/pages/Contracts";
+import ContractSetUpPage from "@/pages/ContractSetUp";
 import SystemSetUpPage from "@/pages/SystemSetUp";
 import UserSetUpPage from "@/pages/UserSetUp";
 import HomePage from "@/pages/Home";
 import TestPage from "@/pages/Test";
-import StudentsSetUp from "@/pages/StudentsSetUp";
+import StudentSetUp from "@/pages/StudentSetUp";
 import ClassSetUpPage from "@/pages/ClassSetUp";
+import { PAGE_PATH } from "./types/common";
 
 const routers: RouterItemType[] = [
   {
-    key: "home",
+    key: PAGE_PATH.HOME,
     label: "数据面板",
     isMenu: true,
     icon: <DashboardOutlined />,
     component: <HomePage />,
   },
   {
-    key: "templateSetUp",
+    key: PAGE_PATH.TEMPLATE_SETUP,
     label: "模版配置",
     isMenu: true,
     icon: <BookOutlined />,
     component: <TemplateSetUpPage />,
   },
   {
-    key: "contracts",
+    key: PAGE_PATH.CONTRACT_SETUP,
     label: "签约客户",
     isMenu: true,
     icon: <UsergroupAddOutlined />,
-    component: <ContractsPage />,
+    component: <ContractSetUpPage />,
   },
   {
-    key: "classSetUp",
+    key: PAGE_PATH.CLASS_SETUP,
     label: "班级配置",
     params: ["id"],
     component: <ClassSetUpPage />,
   },
   {
-    key: "studentsSetUp",
+    key: PAGE_PATH.STUDENT_SETUP,
     label: "学生配置",
     params: ["id"],
-    component: <StudentsSetUp />,
+    component: <StudentSetUp />,
   },
   {
-    key: "systemSetUp",
+    key: PAGE_PATH.SYSTEM_SETUP,
     label: "系统设置",
     icon: <SettingOutlined />,
     component: <SystemSetUpPage />,
   },
   {
-    key: "userSetUp",
+    key: PAGE_PATH.USER_SETUP,
     label: "我的设置",
     isMenu: true,
     icon: <UserOutlined />,
     component: <UserSetUpPage />,
   },
   {
-    key: "test",
+    key: PAGE_PATH.TEST,
     label: "测试页面",
     icon: <BugOutlined />,
     component: <TestPage />,

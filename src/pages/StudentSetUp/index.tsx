@@ -12,7 +12,7 @@ const containerStyle: React.CSSProperties = {
   flexDirection: "column",
 };
 
-const StudentsSetUp: React.FC = () => {
+const StudentSetUp: React.FC = () => {
   const [fetchCount, setFetchCount] = useState(0);
   // 暂时写死一次查询20条
   const pageSize = 20;
@@ -92,4 +92,4 @@ const StudentsSetUp: React.FC = () => {
   );
 };
 
-export default memo(StudentsSetUp);
+export default memo(StudentSetUp);
