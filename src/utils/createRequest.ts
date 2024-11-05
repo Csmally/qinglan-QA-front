@@ -1,5 +1,6 @@
 import { ApiVersion, SystemVersion } from "@/common/consts/commonParams";
-import { BusinessCode, ToastCode } from "@/types/common";
+import useGlobalFuncStore from "@/store/globalFuncStore";
+import { ToastCode } from "@/types/common";
 import { message } from "antd";
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
@@ -56,14 +57,20 @@ const createRequest = ({
       return responseData;
     },
     (error) => {
-      const { message: errorMessage = '网络连接错误' } = error?.response?.data || {};
+      const { message: errorMessage = "网络连接错误", code } =
+        error?.response?.data || {};
       message.error(errorMessage);
+      if (error?.response?.data?.code === 401) {
+        useGlobalFuncStore
+          ?.getState?.()
+          ?.funcs?.globalNavigate?.("/", { replace: true });
+      }
       // 对响应错误做一些处理
       return {
         success: false,
-        code: BusinessCode.ERROR,
+        code,
         data: null,
-        message: errorMessage || "请求失败",
+        message: errorMessage,
       };
     }
   );

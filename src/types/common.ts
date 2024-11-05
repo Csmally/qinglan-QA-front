@@ -10,20 +10,15 @@ enum ToastCode {
   ERROR,
 }
 
-enum BusinessCode {
-  SUCCESS = 0,
-  ERROR = -1,
-}
-
 enum PAGE_PATH {
-  HOME = 'home', // 首页
-  CLASS_SETUP = 'classSetUp', // 班级设置
-  CONTRACT_SETUP = 'contract', // 客户设置
-  STUDENT_SETUP = 'studentSetUp', // 学生设置
-  SYSTEM_SETUP = 'systemSetUp', // 系统设置
-  TEMPLATE_SETUP = 'templateSetUp', // 模版设置
-  TEST = 'test', // 测试页面
-  USER_SETUP = 'userSetUp', // 用户设置
+  HOME = "home", // 首页
+  CLASS_SETUP = "classSetUp", // 班级设置
+  CONTRACT_SETUP = "contract", // 客户设置
+  STUDENT_SETUP = "studentSetUp", // 学生设置
+  SYSTEM_SETUP = "systemSetUp", // 系统设置
+  TEMPLATE_SETUP = "templateSetUp", // 模版设置
+  TEST = "test", // 测试页面
+  USER_SETUP = "userSetUp", // 用户设置
 }
 
-export { GlobalValue, ToastCode, BusinessCode, PAGE_PATH };
+export { GlobalValue, ToastCode, PAGE_PATH };

@@ -21,8 +21,8 @@ const BusinessPages: React.FC = () => {
         </Layout>
       </Layout>
     </Layout>
-  )
-}
+  );
+};
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -37,8 +37,8 @@ const App: React.FC = () => {
     !loading && (
       <Router>
         <Routes>
-          <Route path='/' element={<LoginPage/>} />
-          <Route path="/page/*" element={<BusinessPages />} /> 
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/page/*" element={<BusinessPages />} />
         </Routes>
       </Router>
     )
