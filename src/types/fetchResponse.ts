@@ -20,4 +20,12 @@ interface SingleClassType {
   customerId?: string;
 }
 
-export { SingleTemplateType, SingleCustomerType, SingleClassType };
+interface SingleStudentType {
+  id?: string;
+  name: string;
+  account: string;
+  password: string;
+  classId?: string;
+}
+
+export { SingleTemplateType, SingleCustomerType, SingleClassType, SingleStudentType };

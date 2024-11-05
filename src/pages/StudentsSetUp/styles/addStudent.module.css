@@ -1,0 +1,11 @@
+.studentInfoContainer {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+}
+.inputContainer {
+    flex: 1;
+}
+.label {
+    font-size:16px;
+}

@@ -1,11 +1,11 @@
-import { FloatButton, Modal } from "antd";
+import { FloatButton, Modal, Select, Space } from "antd";
 import { memo, useCallback, useState } from "react";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { fetchAddClass } from "@/services/classSetUpPageServices";
 import { useParams } from "react-router-dom";
 
 interface AddClassBtnPropsType {
-  setCurrentPage: any;
+  reloadData: any;
 }
 
 const addBtnStyle: React.CSSProperties = {
@@ -13,43 +13,92 @@ const addBtnStyle: React.CSSProperties = {
   marginBottom: 50,
 };
 
+
+const gradeOptions = [
+  { value: '1', label: '一年级' },
+  { value: '2', label: '二年级' },
+  { value: '3', label: '三年级' },
+  { value: '4', label: '四年级' },
+  { value: '5', label: '五年级' },
+  { value: '6', label: '六年级' },
+  { value: '7', label: '初中一年级' },
+  { value: '8', label: '初中二年级' },
+  { value: '9', label: '初中三年级' },
+  { value: '10', label: '高中一年级' },
+  { value: '11', label: '高中二年级' },
+  { value: '12', label: '高中三年级' },
+]
+
+const classArr = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15']
+const classOptions = classArr.map((item: string) => ({ value: item, label: `${item}班` }))
+
 const AddClassBtn: React.FC<AddClassBtnPropsType> = (props) => {
-  const { setCurrentPage } = props;
+  const { reloadData } = props;
   // 学校id
   const { id } = useParams();
   const [modalVisible, setModalVisible] = useState(false);
+  const [grade, setGrade] = useState('');
+  const [gradeText, setGradeText] = useState('');
+  const [classValue, setClassValue] = useState('');
+  const [classText, setClassText] = useState('');
   const changeModalVisible = useCallback(
     async (from: string) => {
       if (from === "submit") {
         const { code } = await fetchAddClass({
           classInfo: {
-            grade: "1",
-            gradeText: "一年级",
-            class: "1",
-            classText: "一班",
+            grade,
+            gradeText,
+            class: classValue,
+            classText,
             customerId: id,
           },
         });
         if (code === 0) {
-          setCurrentPage(1);
+          reloadData();
         }
       }
       setModalVisible(false);
+      setGrade('');
+      setGradeText('');
+      setClassValue('');
+      setClassText('');
     },
-    [id, setCurrentPage]
+    [classText, classValue, grade, gradeText, id, reloadData]
   );
+  const gradeHandleSelect = useCallback((value: string, option: any) => {
+    setGrade(value);
+    setGradeText(option.label)
+  }, []);
+  const classHandleSelect = useCallback((value: string, option: any) => {
+    setClassValue(value);
+    setClassText(option.label)
+  }, []);
   return (
     <div>
       <Modal
-        title="添加客户"
-        destroyOnClose
+        title="添加班级"
         open={modalVisible}
         onOk={() => changeModalVisible("submit")}
         onCancel={() => changeModalVisible("cancel")}
         okText="确认添加"
         cancelText="取消"
       >
-        dddd
+        <Space wrap>
+          <div>年级：</div>
+          <Select
+            value={grade}
+            style={{ width: 120 }}
+            onSelect={gradeHandleSelect}
+            options={gradeOptions}
+          />
+          <div>班级：</div>
+          <Select
+            value={classValue}
+            style={{ width: 120 }}
+            onSelect={classHandleSelect}
+            options={classOptions}
+          />
+        </Space>
       </Modal>
       <FloatButton
         type="primary"
