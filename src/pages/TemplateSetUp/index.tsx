@@ -12,6 +12,7 @@ const containerStyle: React.CSSProperties = {
 };
 
 const TemplateSetUpPage: React.FC = () => {
+  const [fetchCount, setFetchCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   // 暂时写死一次查询20条
   const pageSize = 20;
@@ -29,7 +30,14 @@ const TemplateSetUpPage: React.FC = () => {
   }, [currentPage, pageSize]);
   useEffect(() => {
     getTemplateList();
-  }, [getTemplateList]);
+  }, [getTemplateList, fetchCount]);
+  const reloadData = useCallback(() => {
+    if (currentPage === 1) {
+      setFetchCount(fetchCount + 1);
+    } else {
+      setCurrentPage(1);
+    }
+  }, [currentPage, fetchCount]);
   return (
     <div style={containerStyle}>
       <QaTemplates templateList={templateList} />
@@ -39,7 +47,7 @@ const TemplateSetUpPage: React.FC = () => {
         total={total}
         setCurrentPage={setCurrentPage}
       />
-      <AddTemplateBtn setCurrentPage={setCurrentPage} />
+      <AddTemplateBtn reloadData={reloadData} />
     </div>
   );
 };

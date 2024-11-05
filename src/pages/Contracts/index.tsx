@@ -12,6 +12,7 @@ const containerStyle: React.CSSProperties = {
 };
 
 const ContractsPage: React.FC = () => {
+  const [fetchCount, setFetchCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   // 暂时写死一次查询20条
   const pageSize = 20;
@@ -29,7 +30,14 @@ const ContractsPage: React.FC = () => {
   }, [currentPage, pageSize]);
   useEffect(() => {
     getCustomerList();
-  }, [getCustomerList]);
+  }, [getCustomerList, fetchCount]);
+  const reloadData = useCallback(() => {
+    if (currentPage === 1) {
+      setFetchCount(fetchCount + 1);
+    } else {
+      setCurrentPage(1);
+    }
+  }, [currentPage, fetchCount]);
   return (
     <div style={containerStyle}>
       <Customers customerList={customerList} />
@@ -39,7 +47,7 @@ const ContractsPage: React.FC = () => {
         total={total}
         setCurrentPage={setCurrentPage}
       />
-      <AddCustomersBtn setCurrentPage={setCurrentPage} />
+      <AddCustomersBtn reloadData={reloadData} />
     </div>
   );
 };
