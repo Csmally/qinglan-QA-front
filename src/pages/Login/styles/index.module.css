@@ -23,7 +23,6 @@
 
 .panel {
     width: 20vw;
-    /* height: 30vh; */
     box-shadow: inset 0 0 0 200px rgba(255,255,255,0.05);
     background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
@@ -34,6 +33,12 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
+}
+
+@media (max-width: 600px) {
+    .panel {
+        width: 90vw; /* 屏幕宽度小于 600px 时，设置为 90vw */
+    }
 }
 
 .inputContainer {

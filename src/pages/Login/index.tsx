@@ -11,7 +11,7 @@ import useUserInfoStore from "@/store/userInfoStore";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const { setUserInfo} = useUserInfoStore();
+  const { setUserInfo } = useUserInfoStore();
   const { setGlobalFunc } = useGlobalFuncStore();
   useEffect(() => {
     setGlobalFunc({ globalNavigate: navigate });
@@ -48,7 +48,7 @@ const LoginPage: React.FC = () => {
       }
       navigate(`/page/${PAGE_PATH.HOME}`, { replace: true });
     }
-  }, [account, navigate, password]);
+  }, [account, navigate, password, setUserInfo]);
   return (
     <div className={styles.container}>
       <div className={styles.panel}>
