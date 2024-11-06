@@ -58,3 +58,8 @@
 .handleBtn {
     font-size: 15px;
 }
+.qrCodeBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
