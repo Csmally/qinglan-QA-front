@@ -14,13 +14,18 @@ const SingleCustomer: React.FC<SingleCustomerPropsType> = (props) => {
   const { customer } = props;
   const navigate = useNavigate();
   const jumpToClassSettingPage = () => {
-    navigate(`/page/${PAGE_PATH.CLASS_SETUP}/${customer.id}`, { replace: true });
+    navigate(`/page/${PAGE_PATH.CLASS_SETUP}/${customer.id}`, {
+      replace: true,
+    });
   };
   const [modalVisible, setModalVisible] = useState(false);
-  const modalHandle = useCallback((e: any) => {
-    e.stopPropagation(); // 阻止事件冒泡
-    setModalVisible(!modalVisible)
-  }, [modalVisible])
+  const modalHandle = useCallback(
+    (e: any) => {
+      e.stopPropagation(); // 阻止事件冒泡
+      setModalVisible(!modalVisible);
+    },
+    [modalVisible]
+  );
   return (
     <div className={style.container} onClick={jumpToClassSettingPage}>
       <Modal
@@ -30,11 +35,11 @@ const SingleCustomer: React.FC<SingleCustomerPropsType> = (props) => {
         footer={null}
         onCancel={modalHandle}
       >
-        <div className={style.qrCodeBox}>  
-          <QRCode 
+        <div className={style.qrCodeBox}>
+          <QRCode
             errorLevel="H"
             size={200}
-            value={`https://www.onelight.ink/ql/user2c?templateId=${customer.templateId}&customerId=${customer.id}`}
+            value={`https://www.onelight.ink/ql/toc?templateId=${customer.templateId}&customerId=${customer.id}`}
             icon={qrlogo}
           />
         </div>
@@ -46,7 +51,7 @@ const SingleCustomer: React.FC<SingleCustomerPropsType> = (props) => {
         </div>
         <div className={style.handleBar}>
           <SettingOutlined className={style.handleBtn} />
-          <QrcodeOutlined className={style.handleBtn} onClick={modalHandle}/>
+          <QrcodeOutlined className={style.handleBtn} onClick={modalHandle} />
         </div>
       </div>
     </div>
