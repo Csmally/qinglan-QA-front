@@ -3,7 +3,7 @@ import LayoutHeader from "@/components/layout/header";
 import LayoutFooter from "@/components/layout/footer";
 import SiderMenu from "@/components/layout/siderMenu";
 import MainPageView from "@/components/layout/mainPageView";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, HashRouter as Router, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import usePathStore from "@/store/pathStore";
 import routers from "@/routers";
