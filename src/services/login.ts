@@ -1,17 +1,10 @@
+import { LoginResDataType } from "@/types/fetchResponse";
 import request from "@/utils/request";
 
 interface FetchLoginParamsType {
   account: string;
   password: string;
   from: string;
-}
-
-interface LoginResDataType {
-  token: string;
-  name: string;
-  mobile: string;
-  sex: string;
-  age: number;
 }
 
 const fetchLogin = (

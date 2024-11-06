@@ -28,4 +28,15 @@ interface SingleStudentType {
   classId?: string;
 }
 
-export { SingleTemplateType, SingleCustomerType, SingleClassType, SingleStudentType };
+interface LoginResDataType {
+  id?: string;
+  account: string;
+  age?: number;
+  mobile?: string;
+  name?: string;
+  password: string;
+  sex?: string;
+  token: string;
+}
+
+export { SingleTemplateType, SingleCustomerType, SingleClassType, SingleStudentType, LoginResDataType };

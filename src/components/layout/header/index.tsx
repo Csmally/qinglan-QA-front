@@ -1,10 +1,12 @@
 import { Avatar, Layout } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import style from "./index.module.css";
+import useUserInfoStore from "@/store/userInfoStore";
 
 const { Header } = Layout;
 
 const LayoutHeader: React.FC = () => {
+  const { userInfo } = useUserInfoStore();
   return (
     <Header
       style={{
@@ -16,7 +18,10 @@ const LayoutHeader: React.FC = () => {
       }}
     >
       <div className={style.headerImg} />
-      <Avatar size={60} icon={<UserOutlined />} />
+      <div className={style.userInfoBox}>
+        <Avatar icon={<UserOutlined />} />
+        <div>{userInfo.name || userInfo.account}</div>
+      </div>
     </Header>
   );
 };

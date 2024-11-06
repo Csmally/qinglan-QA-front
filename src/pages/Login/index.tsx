@@ -7,9 +7,11 @@ import { UserOutlined, KeyOutlined } from "@ant-design/icons";
 import { fetchLogin } from "@/services/login";
 import useGlobalFuncStore from "@/store/globalFuncStore";
 import request from "@/utils/request";
+import useUserInfoStore from "@/store/userInfoStore";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
+  const { setUserInfo} = useUserInfoStore();
   const { setGlobalFunc } = useGlobalFuncStore();
   useEffect(() => {
     setGlobalFunc({ globalNavigate: navigate });
@@ -37,6 +39,7 @@ const LoginPage: React.FC = () => {
       from: "1",
     });
     if (code === 0) {
+      setUserInfo(data);
       const { token } = data;
       if (token) {
         request.defaults.headers.common["Authorization"] = `Bearer ${token}`;
