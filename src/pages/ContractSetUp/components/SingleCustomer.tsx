@@ -39,7 +39,7 @@ const SingleCustomer: React.FC<SingleCustomerPropsType> = (props) => {
           <QRCode
             errorLevel="H"
             size={200}
-            value={`https://www.onelight.ink/ql/toc#/?templateId=${customer.templateId}&customerId=${customer.id}`}
+            value={`https://www.onelight.ink/ql/toc/#/?templateId=${customer.templateId}&customerId=${customer.id}`}
             icon={qrlogo}
           />
         </div>
