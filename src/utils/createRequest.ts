@@ -12,6 +12,7 @@ interface RequestOptions extends AxiosRequestConfig {
 
 const defaultHeaders = {
   "Content-Type": "application/json", // 设置请求头
+  "QL-Source": "ql_tob", // 来源
   "QL-Sys-Version": `${SystemVersion.major}.${SystemVersion.minor}.${SystemVersion.patch}`, // 系统版本号
   "QL-Api-Version": `${ApiVersion.major}.${ApiVersion.minor}.${ApiVersion.patch}`, // API版本号
 };
