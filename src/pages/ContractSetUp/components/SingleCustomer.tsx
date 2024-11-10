@@ -5,7 +5,7 @@ import { memo, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PAGE_PATH } from "@/types/common";
 import { Modal, QRCode } from "antd";
-import qrlogo from "@/common/statics/imgs/qrlogo.jpg";
+import logo from "@/common/statics/imgs/logo.png";
 
 interface SingleCustomerPropsType {
   customer: SingleCustomerType;
@@ -40,7 +40,7 @@ const SingleCustomer: React.FC<SingleCustomerPropsType> = (props) => {
             errorLevel="H"
             size={200}
             value={`https://www.onelight.ink/ql/toc/#/?templateId=${customer.templateId}&customerId=${customer.id}`}
-            icon={qrlogo}
+            icon={logo}
           />
         </div>
       </Modal>

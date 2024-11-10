@@ -1,7 +1,7 @@
 .headerImg {
     width: 100px;
     height: 100px;
-    background: url('./qllogo.png') no-repeat center;
+    background: url('@/common/statics/imgs/logo.png') no-repeat center;
     background-size: cover;
 }
 
