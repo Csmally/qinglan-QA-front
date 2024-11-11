@@ -5,6 +5,7 @@ import { SingleStudentType } from "@/types/fetchResponse";
 interface FetchStudentListParamsType {
     page: number;
     pageSize: number;
+    classId?: string;
 }
 
 

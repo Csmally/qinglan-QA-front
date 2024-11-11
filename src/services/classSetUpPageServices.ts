@@ -4,6 +4,7 @@ import request from "@/utils/request";
 interface FetchClassListParamsType {
   page: number;
   pageSize: number;
+  customerId?: string;
 }
 
 interface ClassListResDataType {

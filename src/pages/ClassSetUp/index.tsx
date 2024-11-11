@@ -5,7 +5,7 @@ import { SingleClassType } from "@/types/fetchResponse";
 import { fetchClassList } from "@/services/classSetUpPageServices";
 import AddClassBtn from "./components/AddClassBtn";
 import { SearchOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PAGE_PATH } from "@/types/common";
 
 const containerStyle: React.CSSProperties = {
@@ -16,6 +16,8 @@ const containerStyle: React.CSSProperties = {
 
 const ClassSetUpPage: React.FC = () => {
   const navigate = useNavigate();
+  // 学校id
+  const { id } = useParams();
   const [fetchCount, setFetchCount] = useState(0);
   // 暂时写死一次查询20条
   const pageSize = 20;
@@ -26,12 +28,13 @@ const ClassSetUpPage: React.FC = () => {
     const { code, data } = await fetchClassList({
       page: currentPage,
       pageSize,
+      customerId: id,
     });
     if (code === 0) {
       setTotal(data.total || 0);
       setClassList(data?.list || []);
     }
-  }, [currentPage, pageSize]);
+  }, [currentPage, id]);
   const reloadData = useCallback(() => {
     if (currentPage === 1) {
       setFetchCount(fetchCount + 1);

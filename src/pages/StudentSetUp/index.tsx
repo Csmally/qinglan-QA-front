@@ -5,6 +5,7 @@ import { SingleStudentType } from "@/types/fetchResponse";
 import AddStudentBtn from "./components/AddStudentBtn";
 import { SearchOutlined } from "@ant-design/icons";
 import { fetchStudentList } from "@/services/studentsSetUpPageServices";
+import { useParams } from "react-router-dom";
 
 const containerStyle: React.CSSProperties = {
   height: "100%",
@@ -14,6 +15,8 @@ const containerStyle: React.CSSProperties = {
 
 const StudentSetUp: React.FC = () => {
   const [fetchCount, setFetchCount] = useState(0);
+  // 班级id
+  const { id } = useParams();
   // 暂时写死一次查询20条
   const pageSize = 20;
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,12 +26,13 @@ const StudentSetUp: React.FC = () => {
     const { code, data } = await fetchStudentList({
       page: currentPage,
       pageSize,
+      classId: id
     });
     if (code === 0) {
       setTotal(data.total || 0);
       setStudentList(data?.list || []);
     }
-  }, [currentPage, pageSize]);
+  }, [currentPage, id]);
   const reloadData = useCallback(() => {
     if (currentPage === 1) {
       setFetchCount(fetchCount + 1);
