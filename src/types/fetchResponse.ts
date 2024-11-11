@@ -26,6 +26,7 @@ interface SingleStudentType {
   account: string;
   password: string;
   classId?: string;
+  sex: string;
 }
 
 interface LoginResDataType {
@@ -39,4 +40,10 @@ interface LoginResDataType {
   token: string;
 }
 
-export { SingleTemplateType, SingleCustomerType, SingleClassType, SingleStudentType, LoginResDataType };
+export {
+  SingleTemplateType,
+  SingleCustomerType,
+  SingleClassType,
+  SingleStudentType,
+  LoginResDataType,
+};

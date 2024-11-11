@@ -40,7 +40,7 @@ const StudentSetUp: React.FC = () => {
     getStudentList();
   }, [fetchCount, getStudentList]);
   const jumpToStudentPage = useCallback((text: any, record: any) => {
-    console.log('9898record-student', record)
+    console.log("9898record-student", record);
   }, []);
   // 表格列设置
   const columns: TableProps<SingleStudentType>["columns"] = [
@@ -55,6 +55,11 @@ const StudentSetUp: React.FC = () => {
       align: "center",
     },
     {
+      title: "性别",
+      align: "center",
+      render: (text, record) => (record.sex === "1" ? "男" : "女"),
+    },
+    {
       title: "账号",
       dataIndex: "account",
       align: "center",
@@ -67,7 +72,14 @@ const StudentSetUp: React.FC = () => {
     {
       title: "操作",
       align: "center",
-      render: (text, record) => <div style={{color: '#459cff', cursor: 'pointer' }} onClick={() => jumpToStudentPage(text, record)}>查看 <SearchOutlined /></div>,
+      render: (text, record) => (
+        <div
+          style={{ color: "#459cff", cursor: "pointer" }}
+          onClick={() => jumpToStudentPage(text, record)}
+        >
+          查看 <SearchOutlined />
+        </div>
+      ),
     },
   ];
   return (
@@ -78,7 +90,7 @@ const StudentSetUp: React.FC = () => {
           columns={columns}
           pagination={false}
           sticky
-          rowKey={(record) => record.id || ''}
+          rowKey={(record) => record.id || ""}
         />
       </div>
       <PageController
