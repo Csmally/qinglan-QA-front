@@ -11,6 +11,11 @@ interface ClassListResDataType {
   total: number;
   list: SingleClassType[] | null;
 }
+
+interface FetchAnswerParamsType {
+  classId: number;
+}
+
 const fetchClassList = (
   params: FetchClassListParamsType
 ): Promise<ResDataType<ClassListResDataType>> => {
@@ -23,4 +28,10 @@ const fetchAddClass = (params: {
   return request.post("class/add", params);
 };
 
-export { fetchClassList, fetchAddClass };
+const fetchAnswersByClass = (
+  params: FetchAnswerParamsType
+): Promise<ResDataType<any>> => {
+  return request.post("answer/searchByClass", params);
+};
+
+export { fetchClassList, fetchAddClass, fetchAnswersByClass };

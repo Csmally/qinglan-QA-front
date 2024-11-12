@@ -2,9 +2,12 @@ import { Table, TableProps } from "antd";
 import { memo, useCallback, useEffect, useState } from "react";
 import PageController from "@/components/widgets/PageController";
 import { SingleClassType } from "@/types/fetchResponse";
-import { fetchClassList } from "@/services/classSetUpPageServices";
+import {
+  fetchAnswersByClass,
+  fetchClassList,
+} from "@/services/classSetUpPageServices";
 import AddClassBtn from "./components/AddClassBtn";
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined, CloudDownloadOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { PAGE_PATH } from "@/types/common";
 
@@ -45,9 +48,18 @@ const ClassSetUpPage: React.FC = () => {
   useEffect(() => {
     getClassList();
   }, [getClassList, fetchCount]);
-  const jumpToStudentPage = useCallback((text: any, record: any) => {
-    navigate(`/page/${PAGE_PATH.STUDENT_SETUP}/${customerId}/${record.id}`, { replace: true });
-  }, [customerId, navigate]);
+  const jumpToStudentPage = useCallback(
+    (text: any, record: any) => {
+      navigate(`/page/${PAGE_PATH.STUDENT_SETUP}/${customerId}/${record.id}`, {
+        replace: true,
+      });
+    },
+    [customerId, navigate]
+  );
+  const downloadData = useCallback(async (text: any, record: any) => {
+    const res = await fetchAnswersByClass({ classId: record.id });
+    console.log("9898res", res);
+  }, []);
   // 表格列设置
   const columns: TableProps<SingleClassType>["columns"] = [
     {
@@ -68,7 +80,31 @@ const ClassSetUpPage: React.FC = () => {
     {
       title: "操作",
       align: "center",
-      render: (text, record) => <div style={{color: '#459cff', cursor: 'pointer' }} onClick={() => jumpToStudentPage(text, record)}>查看 <SearchOutlined /></div>,
+      render: (text, record) => (
+        <div
+          style={{
+            display: "flex",
+            gap: 5,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{ color: "#459cff", cursor: "pointer" }}
+            onClick={() => jumpToStudentPage(text, record)}
+          >
+            查看 <SearchOutlined />
+          </div>
+          ,
+          <div
+            style={{ color: "#459cff", cursor: "pointer" }}
+            onClick={() => downloadData(text, record)}
+          >
+            下载 <CloudDownloadOutlined />
+          </div>
+          ,
+        </div>
+      ),
     },
   ];
   return (
@@ -79,7 +115,7 @@ const ClassSetUpPage: React.FC = () => {
           columns={columns}
           pagination={false}
           sticky
-          rowKey={(record) => record.id || ''}
+          rowKey={(record) => record.id || ""}
         />
       </div>
       <PageController

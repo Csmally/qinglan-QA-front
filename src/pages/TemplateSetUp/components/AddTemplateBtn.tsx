@@ -61,7 +61,7 @@ const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
       const workbook = new ExcelJS.Workbook();
 
       // 读取文件
-      await workbook.xlsx.load(info.file.originFileObj as unknown as Buffer);
+      await workbook.xlsx.load(info.file.originFileObj as any);
 
       // 获取工作表
       const worksheet = workbook.getWorksheet(1);
