@@ -26,6 +26,7 @@ interface SingleStudentType {
   account: string;
   password: string;
   classId?: string;
+  customerId?: string;
   sex: string;
 }
 

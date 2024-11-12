@@ -35,7 +35,7 @@ const classOptions = classArr.map((item: string) => ({ value: item, label: `${it
 const AddClassBtn: React.FC<AddClassBtnPropsType> = (props) => {
   const { reloadData } = props;
   // 学校id
-  const { id } = useParams();
+  const { customerId } = useParams();
   const [modalVisible, setModalVisible] = useState(false);
   const [grade, setGrade] = useState('');
   const [gradeText, setGradeText] = useState('');
@@ -50,7 +50,7 @@ const AddClassBtn: React.FC<AddClassBtnPropsType> = (props) => {
             gradeText,
             class: classValue,
             classText,
-            customerId: id,
+            customerId,
           },
         });
         if (code === 0) {
@@ -63,7 +63,7 @@ const AddClassBtn: React.FC<AddClassBtnPropsType> = (props) => {
       setClassValue('');
       setClassText('');
     },
-    [classText, classValue, grade, gradeText, id, reloadData]
+    [classText, classValue, customerId, grade, gradeText, reloadData]
   );
   const gradeHandleSelect = useCallback((value: string, option: any) => {
     setGrade(value);

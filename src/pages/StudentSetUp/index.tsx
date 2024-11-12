@@ -16,7 +16,7 @@ const containerStyle: React.CSSProperties = {
 const StudentSetUp: React.FC = () => {
   const [fetchCount, setFetchCount] = useState(0);
   // 班级id
-  const { id } = useParams();
+  const { classId } = useParams();
   // 暂时写死一次查询20条
   const pageSize = 20;
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,13 +26,13 @@ const StudentSetUp: React.FC = () => {
     const { code, data } = await fetchStudentList({
       page: currentPage,
       pageSize,
-      classId: id
+      classId
     });
     if (code === 0) {
       setTotal(data.total || 0);
       setStudentList(data?.list || []);
     }
-  }, [currentPage, id]);
+  }, [classId, currentPage]);
   const reloadData = useCallback(() => {
     if (currentPage === 1) {
       setFetchCount(fetchCount + 1);

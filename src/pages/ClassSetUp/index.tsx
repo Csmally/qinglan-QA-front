@@ -17,7 +17,7 @@ const containerStyle: React.CSSProperties = {
 const ClassSetUpPage: React.FC = () => {
   const navigate = useNavigate();
   // 学校id
-  const { id } = useParams();
+  const { customerId } = useParams();
   const [fetchCount, setFetchCount] = useState(0);
   // 暂时写死一次查询20条
   const pageSize = 20;
@@ -28,13 +28,13 @@ const ClassSetUpPage: React.FC = () => {
     const { code, data } = await fetchClassList({
       page: currentPage,
       pageSize,
-      customerId: id,
+      customerId,
     });
     if (code === 0) {
       setTotal(data.total || 0);
       setClassList(data?.list || []);
     }
-  }, [currentPage, id]);
+  }, [currentPage, customerId]);
   const reloadData = useCallback(() => {
     if (currentPage === 1) {
       setFetchCount(fetchCount + 1);
@@ -46,8 +46,8 @@ const ClassSetUpPage: React.FC = () => {
     getClassList();
   }, [getClassList, fetchCount]);
   const jumpToStudentPage = useCallback((text: any, record: any) => {
-    navigate(`/page/${PAGE_PATH.STUDENT_SETUP}/${record.id}`, { replace: true });
-  }, [navigate]);
+    navigate(`/page/${PAGE_PATH.STUDENT_SETUP}/${customerId}/${record.id}`, { replace: true });
+  }, [customerId, navigate]);
   // 表格列设置
   const columns: TableProps<SingleClassType>["columns"] = [
     {

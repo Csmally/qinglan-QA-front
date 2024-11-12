@@ -22,7 +22,7 @@ const sexOptions = [
 const AddStudentBtn: React.FC<AddStudentBtnPropsType> = (props) => {
   const { reloadData } = props;
   // 班级id
-  const { id } = useParams();
+  const { customerId, classId } = useParams();
   const [modalVisible, setModalVisible] = useState(false);
   const [name, setName] = useState("");
   const [account, setAccount] = useState("");
@@ -48,7 +48,8 @@ const AddStudentBtn: React.FC<AddStudentBtnPropsType> = (props) => {
             name,
             account,
             password,
-            classId: id,
+            classId,
+            customerId,
             sex,
           },
         });
@@ -62,7 +63,7 @@ const AddStudentBtn: React.FC<AddStudentBtnPropsType> = (props) => {
       setPassword("");
       setSex("1");
     },
-    [account, id, name, password, reloadData, sex]
+    [account, classId, customerId, name, password, reloadData, sex]
   );
   const changeStudentNameHandle = useCallback((e: any) => {
     setName(e.target.value);

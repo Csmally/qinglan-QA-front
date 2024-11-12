@@ -41,13 +41,13 @@ const routers: RouterItemType[] = [
   {
     key: PAGE_PATH.CLASS_SETUP,
     label: "班级配置",
-    params: ["id"],
+    params: ["customerId"],
     component: <ClassSetUpPage />,
   },
   {
     key: PAGE_PATH.STUDENT_SETUP,
     label: "学生配置",
-    params: ["id"],
+    params: ["customerId", "classId"],
     component: <StudentSetUp />,
   },
   {
