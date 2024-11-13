@@ -1,7 +1,7 @@
 .headerImg {
     width: 100px;
     height: 100px;
-    background: url('@/common/statics/imgs/logo.png') no-repeat center;
+    background: url('@/statics/logo.png') no-repeat center;
     background-size: cover;
 }
 

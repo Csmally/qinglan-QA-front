@@ -43,7 +43,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html", // 指定 HTML 模板
-      favicon: "./src/common/statics/imgs/logo.png", // 指定 favicon 路径
+      favicon: "./src/statics/favicon.png", // 指定 favicon 路径
     }),
     new Dotenv({ path: envFile }),
   ],

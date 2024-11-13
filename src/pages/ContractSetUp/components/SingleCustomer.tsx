@@ -5,7 +5,7 @@ import { memo, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PAGE_PATH } from "@/types/common";
 import { Modal, QRCode } from "antd";
-import logo from "@/common/statics/imgs/logo.png";
+import logo from "@/statics/logo.png";
 
 interface SingleCustomerPropsType {
   customer: SingleCustomerType;
