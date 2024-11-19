@@ -7,7 +7,11 @@ import {
   fetchClassList,
 } from "@/services/classSetUpPageServices";
 import AddClassBtn from "./components/AddClassBtn";
-import { SearchOutlined, CloudDownloadOutlined } from "@ant-design/icons";
+import {
+  SearchOutlined,
+  CloudDownloadOutlined,
+  ArrowLeftOutlined,
+} from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { PAGE_PATH } from "@/types/common";
 
@@ -50,9 +54,7 @@ const ClassSetUpPage: React.FC = () => {
   }, [getClassList, fetchCount]);
   const jumpToStudentPage = useCallback(
     (text: any, record: any) => {
-      navigate(`/page/${PAGE_PATH.STUDENT_SETUP}/${customerId}/${record.id}`, {
-        replace: true,
-      });
+      navigate(`/page/${PAGE_PATH.STUDENT_SETUP}/${customerId}/${record.id}`);
     },
     [customerId, navigate]
   );
@@ -95,20 +97,24 @@ const ClassSetUpPage: React.FC = () => {
           >
             查看 <SearchOutlined />
           </div>
-          ,
           <div
             style={{ color: "#459cff", cursor: "pointer" }}
             onClick={() => downloadData(text, record)}
           >
             下载 <CloudDownloadOutlined />
           </div>
-          ,
         </div>
       ),
     },
   ];
   return (
     <div style={containerStyle}>
+      <ArrowLeftOutlined
+        style={{ fontSize: 20, marginBottom: 20 }}
+        onClick={() => {
+          navigate(-1);
+        }}
+      />
       <div style={{ flex: 1, overflow: "auto" }}>
         <Table<SingleClassType>
           dataSource={classList}

@@ -1,10 +1,23 @@
-import { FloatButton, Input, message, Modal, Select, Tooltip } from "antd";
+import {
+  FloatButton,
+  Input,
+  message,
+  Modal,
+  Select,
+  Tooltip,
+  InputNumber,
+} from "antd";
 import { memo, useCallback, useState } from "react";
-import { PlusCircleOutlined, SyncOutlined } from "@ant-design/icons";
+import {
+  PlusCircleOutlined,
+  SyncOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import { fetchAddStudent } from "@/services/studentsSetUpPageServices";
 import styles from "../styles/addStudent.module.css";
 import { generateRandomString } from "../tools";
+import UploadStudentBtn from "./UploadStudentBtn";
 
 interface AddStudentBtnPropsType {
   reloadData: any;
@@ -28,11 +41,16 @@ const AddStudentBtn: React.FC<AddStudentBtnPropsType> = (props) => {
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const [sex, setSex] = useState("1");
+  const [age, setAge] = useState(18);
   const changeModalVisible = useCallback(
     async (from: string) => {
       if (from === "submit") {
         if (!name) {
           message.error("请设置用户姓名");
+          return;
+        }
+        if (!age) {
+          message.error("请设置用户年龄");
           return;
         }
         if (!account) {
@@ -51,6 +69,7 @@ const AddStudentBtn: React.FC<AddStudentBtnPropsType> = (props) => {
             classId,
             customerId,
             sex,
+            age,
           },
         });
         if (code === 0) {
@@ -62,8 +81,9 @@ const AddStudentBtn: React.FC<AddStudentBtnPropsType> = (props) => {
       setAccount("");
       setPassword("");
       setSex("1");
+      setAge(18);
     },
-    [account, classId, customerId, name, password, reloadData, sex]
+    [account, age, classId, customerId, name, password, reloadData, sex]
   );
   const changeStudentNameHandle = useCallback((e: any) => {
     setName(e.target.value);
@@ -85,6 +105,9 @@ const AddStudentBtn: React.FC<AddStudentBtnPropsType> = (props) => {
   const changeSex = (value: string) => {
     setSex(value);
   };
+  const changeStudentAgeHandle = useCallback((e: any) => {
+    setAge(e);
+  }, []);
   return (
     <div>
       <Modal
@@ -104,6 +127,10 @@ const AddStudentBtn: React.FC<AddStudentBtnPropsType> = (props) => {
               placeholder="请设置用户姓名"
               onChange={changeStudentNameHandle}
             />
+          </div>
+          <div className={styles.studentInfoContainer}>
+            <div className={styles.label}>年龄：</div>
+            <InputNumber value={age} onChange={changeStudentAgeHandle} />
           </div>
           <div className={styles.studentInfoContainer}>
             <div className={styles.label}>账号：</div>
@@ -146,12 +173,18 @@ const AddStudentBtn: React.FC<AddStudentBtnPropsType> = (props) => {
           </div>
         </div>
       </Modal>
-      <FloatButton
+      <FloatButton.Group
+        trigger="click"
         type="primary"
         icon={<PlusCircleOutlined />}
         style={addBtnStyle}
-        onClick={() => setModalVisible(true)}
-      />
+      >
+        <FloatButton
+          icon={<EditOutlined />}
+          onClick={() => setModalVisible(true)}
+        />
+        <UploadStudentBtn reloadData={reloadData} />
+      </FloatButton.Group>
     </div>
   );
 };

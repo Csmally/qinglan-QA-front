@@ -1,11 +1,15 @@
-import { Table, TableProps } from "antd";
+import { message, Table, TableProps } from "antd";
 import { memo, useCallback, useEffect, useState } from "react";
 import PageController from "@/components/widgets/PageController";
 import { SingleStudentType } from "@/types/fetchResponse";
 import AddStudentBtn from "./components/AddStudentBtn";
-import { SearchOutlined } from "@ant-design/icons";
+import {
+  SearchOutlined,
+  ArrowLeftOutlined,
+  CloudDownloadOutlined,
+} from "@ant-design/icons";
 import { fetchStudentList } from "@/services/studentsSetUpPageServices";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const containerStyle: React.CSSProperties = {
   height: "100%",
@@ -14,6 +18,7 @@ const containerStyle: React.CSSProperties = {
 };
 
 const StudentSetUp: React.FC = () => {
+  const navigate = useNavigate();
   const [fetchCount, setFetchCount] = useState(0);
   // 班级id
   const { classId } = useParams();
@@ -26,7 +31,7 @@ const StudentSetUp: React.FC = () => {
     const { code, data } = await fetchStudentList({
       page: currentPage,
       pageSize,
-      classId
+      classId,
     });
     if (code === 0) {
       setTotal(data.total || 0);
@@ -43,8 +48,11 @@ const StudentSetUp: React.FC = () => {
   useEffect(() => {
     getStudentList();
   }, [fetchCount, getStudentList]);
-  const jumpToStudentPage = useCallback((text: any, record: any) => {
-    console.log("9898record-student", record);
+  const jumpToStudentPage = useCallback(() => {
+    message.error("暂不支持该功能");
+  }, []);
+  const downloadData = useCallback(() => {
+    message.error("暂不支持该功能");
   }, []);
   // 表格列设置
   const columns: TableProps<SingleStudentType>["columns"] = [
@@ -76,18 +84,39 @@ const StudentSetUp: React.FC = () => {
     {
       title: "操作",
       align: "center",
-      render: (text, record) => (
+      render: () => (
         <div
-          style={{ color: "#459cff", cursor: "pointer" }}
-          onClick={() => jumpToStudentPage(text, record)}
+          style={{
+            display: "flex",
+            gap: 5,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          查看 <SearchOutlined />
+          <div
+            style={{ color: "#459cff", cursor: "pointer" }}
+            onClick={() => jumpToStudentPage()}
+          >
+            查看 <SearchOutlined />
+          </div>
+          <div
+            style={{ color: "#459cff", cursor: "pointer" }}
+            onClick={() => downloadData()}
+          >
+            下载 <CloudDownloadOutlined />
+          </div>
         </div>
       ),
     },
   ];
   return (
     <div style={containerStyle}>
+      <ArrowLeftOutlined
+        style={{ fontSize: 20, marginBottom: 20 }}
+        onClick={() => {
+          navigate(-1);
+        }}
+      />
       <div style={{ flex: 1, overflow: "auto" }}>
         <Table<SingleStudentType>
           dataSource={studentList}

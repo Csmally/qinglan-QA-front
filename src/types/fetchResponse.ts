@@ -28,6 +28,7 @@ interface SingleStudentType {
   classId?: string;
   customerId?: string;
   sex: string;
+  age: number;
 }
 
 interface LoginResDataType {

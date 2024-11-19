@@ -1,8 +1,6 @@
-.headerImg {
-    width: 100px;
-    height: 100px;
-    background: url('@/statics/logo.png') no-repeat center;
-    background-size: cover;
+.companyName {
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .userInfoBox {
