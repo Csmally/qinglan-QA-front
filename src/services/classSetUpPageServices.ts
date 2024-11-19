@@ -1,4 +1,4 @@
-import { SingleClassType } from "@/types/fetchResponse";
+import { SingleClassType, SingleStudentType } from "@/types/fetchResponse";
 import request from "@/utils/request";
 
 interface FetchClassListParamsType {
@@ -12,8 +12,17 @@ interface ClassListResDataType {
   list: SingleClassType[] | null;
 }
 
+interface FetchStudentsResType {
+  total: number;
+  list: SingleStudentType[];
+}
 interface FetchAnswerParamsType {
-  classId: number;
+  classId: string;
+}
+
+interface FetchStudentsParamsType {
+  customerId: string;
+  classId: string;
 }
 
 const fetchClassList = (
@@ -34,4 +43,15 @@ const fetchAnswersByClass = (
   return request.post("answer/searchByClass", params);
 };
 
-export { fetchClassList, fetchAddClass, fetchAnswersByClass };
+const fetchStudentsByClass = (
+  params: FetchStudentsParamsType
+): Promise<ResDataType<FetchStudentsResType>> => {
+  return request.post("student/searchByClass", params);
+};
+
+export {
+  fetchClassList,
+  fetchAddClass,
+  fetchAnswersByClass,
+  fetchStudentsByClass,
+};

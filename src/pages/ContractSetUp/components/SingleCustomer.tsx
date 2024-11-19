@@ -14,7 +14,11 @@ const SingleCustomer: React.FC<SingleCustomerPropsType> = (props) => {
   const { customer } = props;
   const navigate = useNavigate();
   const jumpToClassSettingPage = () => {
-    navigate(`/page/${PAGE_PATH.CLASS_SETUP}/${customer.id}`);
+    navigate(`/page/${PAGE_PATH.CLASS_SETUP}/${customer.id}`, {
+      state: {
+        customerName: customer.name,
+      },
+    });
   };
   const [modalVisible, setModalVisible] = useState(false);
   const modalHandle = useCallback(
