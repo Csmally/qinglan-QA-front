@@ -56,7 +56,7 @@ const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
     if (status === "error") {
       fileListLengthRef.current++;
       // 模版数据源头
-      const fileTemplate = {};
+      const fileTemplate: any = {};
       // 创建工作簿实例
       const workbook = new ExcelJS.Workbook();
 
@@ -64,16 +64,18 @@ const AddTemplateBtn: React.FC<AddTemplateBtnPropsType> = (props) => {
       await workbook.xlsx.load(info.file.originFileObj as any);
 
       // 获取工作表
-      const worksheet = workbook.getWorksheet(1);
-
-      // 遍历行并输出数据
-      worksheet?.eachRow((row, rowNumber) => {
-        formatFileData({
-          fileTemplate,
-          rowNumber,
-          rowValues: row.values as any[],
+      workbook.eachSheet((worksheet, sheetId) => {
+        // 遍历行并输出数据
+        worksheet?.eachRow((row, rowNumber) => {
+          formatFileData({
+            fileTemplate,
+            sheetId,
+            rowNumber,
+            rowValues: row.values as any[],
+          });
         });
-      });
+      })
+      delete fileTemplate.optionsConfigList;
       setTemplateList((list) => [...list, fileTemplate]);
     }
   }, []);

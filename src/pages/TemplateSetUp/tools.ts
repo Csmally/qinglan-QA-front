@@ -1,71 +1,85 @@
-import { GlobalValue } from "@/types/common";
-
 interface FormatFileDataType {
   fileTemplate: any;
+  sheetId: number;
   rowNumber: number;
   rowValues: any[];
 }
 
-const getTemplateConfigs = (data: any[]) => {
+const chunkArray = (array: any[], chunkSize: number) => {
+  // 初始化一个空的结果数组
   const result = [];
-
-  for (let i = 0; i < data.length; i += 2) {
-    const value = `${data[i]}`;
-    const showText = data[i + 1];
-
-    // 将每对元素转换为对象并推入结果数组
-    result.push({ value, showText });
+  
+  // 使用 for 循环遍历原数组
+  for (let i = 0; i < array.length; i += chunkSize) {
+      // 使用 slice 方法获取子数组，并将其添加到结果数组中
+      const chunk = array.slice(i, i + chunkSize);
+      result.push(chunk);
   }
-
+  
   return result;
-};
+}
+const getValueGroups = (data: any[]) => {
+  const chunkData = chunkArray(data, 3)
+  const result: any[] = [];
+  chunkData.forEach(chunk => {
+    const minMaxValue = chunk[0].split("，");
+    result.push({
+      minValue: Number(minMaxValue[0]),
+      maxValue: Number(minMaxValue[1]),
+      valueDesc: chunk[1],
+      valueSug: chunk[2],
+    })
+  })
+  return result;
+}
 
-function getTemplateQuestion(
-  data: any[],
-  optionsConfigList: any[],
-  groupOptions: any[]
-) {
-  let questionOptions: any[];
-  if (data?.[1]) {
-    questionOptions = `${data[1]}`
-      .split("，")
-      .map((item: any) => optionsConfigList[item - 1]);
-  } else {
-    questionOptions = [];
-  }
-  // 返回目标对象
+const setQuestions = (fileTemplate: any, questionsData: any[]) => {
+  const { optionsConfigList, groupOptions } = fileTemplate;
   const question = {
-    questionName: data[0] || GlobalValue.UNKNOWN_VALUE,
-    questionOptions,
-    isJudge: data[3] ? true : false,
-  };
-  if (!groupOptions[data[2] - 1].questions) {
-    groupOptions[data[2] - 1].questions = [];
+    questionName: questionsData[0],
+    questionOptions: questionsData[2].split("，").map((i: string) => optionsConfigList.find((conf: any) => conf.index === Number(i))),
   }
-  groupOptions[data[2] - 1].questions.push(question);
+  const group = groupOptions.find((group: any) => group.index === questionsData[1]);
+  if (!group.questions) {
+    group.questions = []
+  }
+  group.questions.push(question)
 }
 
 const formatFileData = (args: FormatFileDataType) => {
-  const { fileTemplate, rowNumber, rowValues } = args;
-  const realRowValues = rowValues?.slice(2);
-  if (rowNumber === 1) {
+  const { fileTemplate, sheetId, rowNumber, rowValues } = args;
+  if (rowNumber === 1) return;
+  const realRowValues = rowValues?.slice(1);
+  // 文件名称&描述
+  if (sheetId === 1) {
     fileTemplate.name = realRowValues?.[0];
+    fileTemplate.desc = realRowValues?.[1];
   }
-  if (rowNumber === 2) {
-    fileTemplate.desc = realRowValues?.[0];
+  // 选项配置
+  if (sheetId === 2) {
+    if (!fileTemplate.optionsConfigList) {
+      fileTemplate.optionsConfigList = [];
+    }
+    fileTemplate.optionsConfigList.push({
+      index: realRowValues[0],
+      value: realRowValues[1],
+      showText: realRowValues[2],
+    })
   }
-  if (rowNumber === 3) {
-    fileTemplate.optionsConfigList = getTemplateConfigs(realRowValues);
+  // 分组配置
+  if (sheetId === 3) {
+    if (!fileTemplate.groupOptions) {
+      fileTemplate.groupOptions = [];
+    }
+    fileTemplate.groupOptions.push({
+      index: realRowValues[0],
+      showText: realRowValues[1],
+      shortName: realRowValues[2],
+      valueGroups: getValueGroups(realRowValues.slice(3))
+    })
   }
-  if (rowNumber === 4) {
-    fileTemplate.groupOptions = getTemplateConfigs(realRowValues);
-  }
-  if (rowNumber > 4) {
-    getTemplateQuestion(
-      realRowValues,
-      fileTemplate.optionsConfigList,
-      fileTemplate.groupOptions
-    );
+  if (sheetId === 4) {
+    setQuestions(fileTemplate, realRowValues)
   }
 };
 
