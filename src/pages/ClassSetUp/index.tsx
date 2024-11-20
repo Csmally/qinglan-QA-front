@@ -65,17 +65,23 @@ const ClassSetUpPage: React.FC = () => {
     },
     [customerId, navigate]
   );
-  const downloadReportData = useCallback(async (text: any, record: any) => {
-    const { code, data } = await fetchAnswersByClass({ classId: record.id, templateId });
-    if (code === 0) {
-      const { list, template } = data;
-      if (list.length === 0) {
-        message.error("无数据可导出");
-        return;
+  const downloadReportData = useCallback(
+    async (text: any, record: any) => {
+      const { code, data } = await fetchAnswersByClass({
+        classId: record.id,
+        templateId,
+      });
+      if (code === 0) {
+        const { list, template } = data;
+        if (list.length === 0) {
+          message.error("无数据可导出");
+          return;
+        }
+        saveAsExcelAnswer({ answerList: list, template });
       }
-      saveAsExcelAnswer({ answerList: list, template })
-    }
-  }, [templateId]);
+    },
+    [templateId]
+  );
   const downloadStudentsData = useCallback(
     async (text: any, record: any) => {
       const { code, data } = await fetchStudentsByClass({

@@ -13,6 +13,7 @@
   "dependencies": {
     "antd": "^5.21.5",
     "axios": "^1.7.7",
+    "docx": "^9.0.3",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "react": "^18.3.1",
