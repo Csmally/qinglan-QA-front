@@ -16,7 +16,7 @@ import {
 } from "@ant-design/icons";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { PAGE_PATH } from "@/types/common";
-import { saveAsExcelStudents } from "./utils/tools";
+import { saveAsExcelAnswer, saveAsExcelStudents } from "./utils/tools";
 
 const containerStyle: React.CSSProperties = {
   height: "100%",
@@ -31,7 +31,7 @@ const ClassSetUpPage: React.FC = () => {
   // 学校名称
   const location = useLocation();
   const { state = {} } = location;
-  const { customerName = "" } = state;
+  const { customerName = "", templateId = -1 } = state;
   const [fetchCount, setFetchCount] = useState(0);
   // 暂时写死一次查询20条
   const pageSize = 20;
@@ -66,9 +66,16 @@ const ClassSetUpPage: React.FC = () => {
     [customerId, navigate]
   );
   const downloadReportData = useCallback(async (text: any, record: any) => {
-    const res = await fetchAnswersByClass({ classId: record.id });
-    console.log("9898res--aa", res);
-  }, []);
+    const { code, data } = await fetchAnswersByClass({ classId: record.id, templateId });
+    if (code === 0) {
+      const { list, template } = data;
+      if (list.length === 0) {
+        message.error("无数据可导出");
+        return;
+      }
+      saveAsExcelAnswer({ answerList: list, template })
+    }
+  }, [templateId]);
   const downloadStudentsData = useCallback(
     async (text: any, record: any) => {
       const { code, data } = await fetchStudentsByClass({

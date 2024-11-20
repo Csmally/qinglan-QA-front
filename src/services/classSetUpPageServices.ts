@@ -18,11 +18,17 @@ interface FetchStudentsResType {
 }
 interface FetchAnswerParamsType {
   classId: string;
+  templateId: number;
 }
 
 interface FetchStudentsParamsType {
   customerId: string;
   classId: string;
+}
+
+interface FetchAnswersByClassResType {
+  list: any[];
+  template: any;
 }
 
 const fetchClassList = (
@@ -39,7 +45,7 @@ const fetchAddClass = (params: {
 
 const fetchAnswersByClass = (
   params: FetchAnswerParamsType
-): Promise<ResDataType<any>> => {
+): Promise<ResDataType<FetchAnswersByClassResType>> => {
   return request.post("answer/searchByClass", params);
 };
 

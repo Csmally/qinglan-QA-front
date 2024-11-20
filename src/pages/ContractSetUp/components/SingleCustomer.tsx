@@ -17,6 +17,7 @@ const SingleCustomer: React.FC<SingleCustomerPropsType> = (props) => {
     navigate(`/page/${PAGE_PATH.CLASS_SETUP}/${customer.id}`, {
       state: {
         customerName: customer.name,
+        templateId: customer.templateId,
       },
     });
   };

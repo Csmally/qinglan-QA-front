@@ -9,6 +9,11 @@ interface SaveAsExcelStudentsParamType {
   jsonData: SingleStudentType[] | null;
 }
 
+interface SaveAsExcelAnswerParamType {
+  answerList: any[];
+  template: any;
+}
+
 const saveAsExcelStudents = async (args: SaveAsExcelStudentsParamType) => {
   const { customerName, gradeText, classText, jsonData } = args;
   jsonData?.forEach((item) => {
@@ -47,6 +52,12 @@ const saveAsExcelStudents = async (args: SaveAsExcelStudentsParamType) => {
   saveAs(blob, `${customerName}_${gradeText}_${classText}.xlsx`);
 };
 
+const saveAsExcelAnswer = async (args: SaveAsExcelAnswerParamType) => {
+  const { answerList, template } = args;
+  console.log('9898answerList', answerList)
+  console.log('9898template', template)
+}
+
 const gradeOptions = [
   { value: "1", label: "一年级" },
   { value: "2", label: "二年级" },
@@ -80,4 +91,4 @@ const classArr = [
   "15",
 ];
 
-export { saveAsExcelStudents, gradeOptions, classArr };
+export { saveAsExcelStudents, gradeOptions, classArr, saveAsExcelAnswer };
