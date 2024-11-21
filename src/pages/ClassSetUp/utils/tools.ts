@@ -1,6 +1,7 @@
 import { SingleStudentType } from "@/types/fetchResponse";
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
+import { analyzeData, saveAnalyzeDataAsWord } from "./woerTools";
 
 interface SaveAsExcelStudentsParamType {
   customerName: string;
@@ -54,8 +55,8 @@ const saveAsExcelStudents = async (args: SaveAsExcelStudentsParamType) => {
 
 const saveAsExcelAnswer = async (args: SaveAsExcelAnswerParamType) => {
   const { answerList, template } = args;
-  console.log('9898answerList', answerList)
-  console.log('9898template', template)
+  analyzeData(answerList, template);
+  saveAnalyzeDataAsWord(answerList, template)
 }
 
 const gradeOptions = [
