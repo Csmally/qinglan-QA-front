@@ -17,7 +17,7 @@ const LayoutHeader: React.FC = () => {
         padding: 20,
       }}
     >
-      <div className={style.companyName}>清岚教育咨询</div>
+      <div className={style.companyName}>OneLight Tech</div>
       <div className={style.userInfoBox}>
         <Avatar icon={<UserOutlined />} />
         <div>{userInfo.name || userInfo.account}</div>

@@ -13,7 +13,7 @@ const LayoutFooter: React.FC = () => {
         color: '#9e9e9e'
       }}
     >
-      —— 清岚问卷 ——
+      Powered By onelight.ink
     </Footer>
   );
 };
