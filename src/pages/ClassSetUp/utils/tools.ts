@@ -13,6 +13,9 @@ interface SaveAsExcelStudentsParamType {
 interface SaveAsExcelAnswerParamType {
   answerList: any[];
   template: any;
+  customerName: string;
+  gradeText: string;
+  classText: string;
 }
 
 const saveAsExcelStudents = async (args: SaveAsExcelStudentsParamType) => {
@@ -54,10 +57,16 @@ const saveAsExcelStudents = async (args: SaveAsExcelStudentsParamType) => {
 };
 
 const saveAsExcelAnswer = async (args: SaveAsExcelAnswerParamType) => {
-  const { answerList, template } = args;
+  const { answerList, template, customerName, gradeText, classText } = args;
   analyzeData(answerList, template);
-  saveAnalyzeDataAsWord(answerList, template)
-}
+  saveAnalyzeDataAsWord({
+    answerList,
+    template,
+    customerName,
+    gradeText,
+    classText,
+  });
+};
 
 const gradeOptions = [
   { value: "1", label: "一年级" },

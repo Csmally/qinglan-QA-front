@@ -77,10 +77,16 @@ const ClassSetUpPage: React.FC = () => {
           message.error("无数据可导出");
           return;
         }
-        saveAsExcelAnswer({ answerList: list, template });
+        saveAsExcelAnswer({
+          answerList: list,
+          template,
+          customerName,
+          gradeText: record.gradeText,
+          classText: record.classText,
+        });
       }
     },
-    [templateId]
+    [customerName, templateId]
   );
   const downloadStudentsData = useCallback(
     async (text: any, record: any) => {
