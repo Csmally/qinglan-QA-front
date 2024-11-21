@@ -13,3 +13,7 @@
 .label {
     font-weight: 500;
 }
+
+.inputContainer {
+    width: 200px;
+}

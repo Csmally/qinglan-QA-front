@@ -32,7 +32,7 @@ interface SingleStudentType {
 }
 
 interface LoginResDataType {
-  id?: string;
+  id: number;
   account: string;
   age?: number;
   mobile?: string;
