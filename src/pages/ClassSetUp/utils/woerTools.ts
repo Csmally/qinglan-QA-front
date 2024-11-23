@@ -125,7 +125,7 @@ const saveAnalyzeDataAsWord = async (args: SaveAnalyzeDataAsWordParamType) => {
           bold: true,
         }),
         wordText({
-          text: "清岚教育咨询有限公司",
+          text: "万籁亿光科技有限公司",
           spacingAfter: 400,
           alignment: "center",
           color: "#3198c8",
